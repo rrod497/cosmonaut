@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://cqfumx5p2pwa1"]
+
+[ext_resource type="Texture2D" uid="uid://cp1hh36424su3" path="res://art/simpleSpace_tilesheet.png" id="1_axov6"]
+[ext_resource type="Script" path="res://ship.gd" id="1_u4eb8"]
+[ext_resource type="Texture2D" uid="uid://0a2k0msyoafd" path="res://art/circle1.png" id="3_g4knl"]
+[ext_resource type="Script" path="res://game/core/state_machine.gd" id="4_y2mtr"]
+[ext_resource type="Script" path="res://State.gd" id="5_gnwti"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plx2s"]
+size = Vector2(48, 48)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tj786"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_mfad5"]
+offsets = PackedFloat32Array(0, 0.482759, 1)
+colors = PackedColorArray(1, 1, 1, 0.74902, 0.49, 0.5495, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x8w6y"]
+gradient = SubResource("Gradient_mfad5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iuk3x"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 98, 0)
+tangential_accel_max = 50.0
+damping_max = 50.0
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_x8w6y")
+hue_variation_max = 0.25
+anim_offset_max = 0.5
+
+[node name="ship" type="CharacterBody2D"]
+script = ExtResource("1_u4eb8")
+
+[node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_plx2s")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_axov6")
+centered = false
+hframes = 8
+vframes = 6
+frame = 4
+
+[node name="muzzle" type="Marker2D" parent="."]
+position = Vector2(32, 0)
+
+[node name="thruster_left" type="Node2D" parent="."]
+position = Vector2(16, 56)
+
+[node name="emitter" type="GPUParticles2D" parent="thruster_left"]
+material = SubResource("CanvasItemMaterial_tj786")
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_iuk3x")
+texture = ExtResource("3_g4knl")
+lifetime = 2.0
+speed_scale = 2.0
+explosiveness = 0.15
+randomness = 0.2
+
+[node name="thruster_right" type="Node2D" parent="."]
+position = Vector2(48, 56)
+
+[node name="emitter" type="GPUParticles2D" parent="thruster_right"]
+material = SubResource("CanvasItemMaterial_tj786")
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_iuk3x")
+texture = ExtResource("3_g4knl")
+lifetime = 2.0
+speed_scale = 2.0
+explosiveness = 0.15
+randomness = 0.2
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_y2mtr")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_gnwti")

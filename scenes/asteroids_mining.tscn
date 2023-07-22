@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5rn8w3q10x2s"]
+
+[ext_resource type="PackedScene" uid="uid://b8d5qitc3sv5w" path="res://scenes/player.tscn" id="1_pg3fu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3pqc3"]
+size = Vector2(864, 1536)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_opcbo"]
+b = Vector2(0, 1536)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_63lpn"]
+a = Vector2(864, 0)
+b = Vector2(864, 1536)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mr56y"]
+b = Vector2(864, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ikou8"]
+a = Vector2(0, 1536)
+b = Vector2(864, 1536)
+
+[node name="asteroids_mining" type="Node2D"]
+
+[node name="area" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="area"]
+position = Vector2(432, 768)
+shape = SubResource("RectangleShape2D_3pqc3")
+
+[node name="bounds" type="StaticBody2D" parent="area"]
+
+[node name="left" type="CollisionShape2D" parent="area/bounds"]
+shape = SubResource("SegmentShape2D_opcbo")
+
+[node name="right" type="CollisionShape2D" parent="area/bounds"]
+shape = SubResource("SegmentShape2D_63lpn")
+
+[node name="top" type="CollisionShape2D" parent="area/bounds"]
+shape = SubResource("SegmentShape2D_mr56y")
+
+[node name="bottom" type="CollisionShape2D" parent="area/bounds"]
+shape = SubResource("SegmentShape2D_ikou8")
+
+[node name="player" parent="." instance=ExtResource("1_pg3fu")]
+position = Vector2(432, 1228)
