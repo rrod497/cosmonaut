@@ -1,0 +1,515 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmoyegcvkkgef"]
+
+[ext_resource type="Texture2D" uid="uid://b7p6434pke4ot" path="res://art/UI/uipackSpace_vector.svg" id="1_6lalk"]
+[ext_resource type="FontFile" uid="uid://minpw0dtma68" path="res://art/Fonts/kenvector_future.ttf" id="2_8srk5"]
+[ext_resource type="FontFile" uid="uid://3ywy2kq3warx" path="res://art/Fonts/Kenney Rocket Square.ttf" id="3_ih0ud"]
+[ext_resource type="Texture2D" uid="uid://c0bf2ofdm7tkl" path="res://art/UI/spaceParts_087.png" id="4_t7xeg"]
+[ext_resource type="Texture2D" uid="uid://ba1qv7w43y2ks" path="res://art/UI/spaceStation_006.png" id="5_qv14y"]
+[ext_resource type="Texture2D" uid="uid://ckfy0sclj0ruc" path="res://art/Characters/head.png" id="6_bvhj7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4vse"]
+atlas = ExtResource("1_6lalk")
+
+[node name="Game_scene" type="Node2D"]
+
+[node name="HUD_BG" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BG_MetalPanel" type="NinePatchRect" parent="HUD_BG"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("AtlasTexture_a4vse")
+region_rect = Rect2(219, 259, 100, 100)
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+axis_stretch_vertical = 2
+
+[node name="BG_SceneDisplay" type="NinePatchRect" parent="HUD_BG"]
+offset_left = 560.0
+offset_top = 64.0
+offset_right = 1360.0
+offset_bottom = 1024.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(239, 370, 80, 80)
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="BG_MapDisplay" type="NinePatchRect" parent="HUD_BG"]
+offset_left = 1408.0
+offset_top = 64.0
+offset_right = 1856.0
+offset_bottom = 1024.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(239, 370, 80, 80)
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="HUD_Elements" type="Node2D" parent="."]
+position = Vector2(24, 216)
+
+[node name="HPDisplay" type="Node2D" parent="HUD_Elements"]
+position = Vector2(200, 72)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="BG_HPDisplay" type="NinePatchRect" parent="HUD_Elements/HPDisplay"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 312.0
+offset_bottom = 120.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(239, 370, 80, 80)
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="HPWidget" type="NinePatchRect" parent="HUD_Elements/HPDisplay"]
+offset_right = 304.0
+offset_bottom = 112.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(439, 259, 100, 100)
+patch_margin_left = 13
+patch_margin_top = 32
+patch_margin_right = 53
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="HPBarShadow" type="NinePatchRect" parent="HUD_Elements/HPDisplay"]
+offset_left = 80.0
+offset_top = 48.0
+offset_right = 288.0
+offset_bottom = 88.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(150, 264, 19, 26)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="ShieldShadow" type="NinePatchRect" parent="HUD_Elements/HPDisplay"]
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 72.0
+offset_bottom = 96.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(150, 305, 24, 24)
+
+[node name="Label" type="Label" parent="HUD_Elements/HPDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 88.0
+offset_top = -3.0
+offset_right = 184.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8srk5")
+theme_override_font_sizes/font_size = 32
+text = "HP"
+horizontal_alignment = 1
+
+[node name="FuelDisplay" type="Node2D" parent="HUD_Elements"]
+position = Vector2(200, 208)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="BG_FuelDisplay" type="NinePatchRect" parent="HUD_Elements/FuelDisplay"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 312.0
+offset_bottom = 120.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(239, 370, 80, 80)
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="FuelWidget" type="NinePatchRect" parent="HUD_Elements/FuelDisplay"]
+offset_right = 304.0
+offset_bottom = 112.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(329, 369, 100, 100)
+patch_margin_left = 13
+patch_margin_top = 32
+patch_margin_right = 53
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="FuelBarShadow" type="NinePatchRect" parent="HUD_Elements/FuelDisplay"]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 288.0
+offset_bottom = 88.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(150, 264, 19, 26)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Label" type="Label" parent="HUD_Elements/FuelDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -3.0
+offset_right = 188.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8srk5")
+theme_override_font_sizes/font_size = 32
+text = "Fuel"
+horizontal_alignment = 1
+
+[node name="StorageDisplay" type="Node2D" parent="HUD_Elements"]
+position = Vector2(224, 352)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="BG_StorageDisplay" type="NinePatchRect" parent="HUD_Elements/StorageDisplay"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 120.0
+offset_bottom = 312.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(239, 370, 80, 80)
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="StorageWidget" type="NinePatchRect" parent="HUD_Elements/StorageDisplay"]
+offset_right = 112.0
+offset_bottom = 304.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(659, 369, 100, 100)
+patch_margin_left = 13
+patch_margin_top = 33
+patch_margin_right = 13
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="Slot1Shadow" type="NinePatchRect" parent="HUD_Elements/StorageDisplay"]
+offset_left = 16.0
+offset_top = 72.0
+offset_right = 96.0
+offset_bottom = 112.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(150, 264, 19, 26)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Slot2Shadow" type="NinePatchRect" parent="HUD_Elements/StorageDisplay"]
+offset_left = 16.0
+offset_top = 144.0
+offset_right = 96.0
+offset_bottom = 184.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(150, 264, 19, 26)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Slot3Shadow" type="NinePatchRect" parent="HUD_Elements/StorageDisplay"]
+offset_left = 16.0
+offset_top = 216.0
+offset_right = 96.0
+offset_bottom = 256.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(150, 264, 19, 26)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Label" type="Label" parent="HUD_Elements/StorageDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 1.0
+offset_right = 108.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8srk5")
+theme_override_font_sizes/font_size = 24
+text = "cargo"
+
+[node name="WeaponDisplay" type="Node2D" parent="HUD_Elements"]
+position = Vector2(368, 352)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="BG_WeaponDisplay" type="NinePatchRect" parent="HUD_Elements/WeaponDisplay"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 120.0
+offset_bottom = 312.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(239, 370, 80, 80)
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="WeaponWidget" type="NinePatchRect" parent="HUD_Elements/WeaponDisplay"]
+offset_right = 112.0
+offset_bottom = 304.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(549, 259, 100, 100)
+patch_margin_left = 13
+patch_margin_top = 33
+patch_margin_right = 13
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="SliderShadow" type="NinePatchRect" parent="HUD_Elements/WeaponDisplay"]
+offset_left = 80.0
+offset_top = 40.0
+offset_right = 88.0
+offset_bottom = 280.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(150, 264, 19, 26)
+
+[node name="Lv1Label" type="Label" parent="HUD_Elements/WeaponDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 245.0
+offset_right = 65.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.458824, 0.435294, 0.415686, 1)
+theme_override_fonts/font = ExtResource("3_ih0ud")
+theme_override_font_sizes/font_size = 16
+text = "Lv1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lv2Label" type="Label" parent="HUD_Elements/WeaponDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 197.0
+offset_right = 65.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.458824, 0.435294, 0.415686, 1)
+theme_override_fonts/font = ExtResource("3_ih0ud")
+theme_override_font_sizes/font_size = 16
+text = "Lv2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lv3Label" type="Label" parent="HUD_Elements/WeaponDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 149.0
+offset_right = 65.0
+offset_bottom = 172.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.458824, 0.435294, 0.415686, 1)
+theme_override_fonts/font = ExtResource("3_ih0ud")
+theme_override_font_sizes/font_size = 16
+text = "Lv3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lv4Label" type="Label" parent="HUD_Elements/WeaponDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 101.0
+offset_right = 65.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.458824, 0.435294, 0.415686, 1)
+theme_override_fonts/font = ExtResource("3_ih0ud")
+theme_override_font_sizes/font_size = 16
+text = "Lv4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lv5Label" type="Label" parent="HUD_Elements/WeaponDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 53.0
+offset_right = 65.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.458824, 0.435294, 0.415686, 1)
+theme_override_fonts/font = ExtResource("3_ih0ud")
+theme_override_font_sizes/font_size = 16
+text = "Lv5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slider" type="NinePatchRect" parent="HUD_Elements/WeaponDisplay"]
+offset_left = 72.0
+offset_top = 248.0
+offset_right = 96.0
+offset_bottom = 264.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(0, 264, 20, 26)
+
+[node name="WeaponLabel" type="Label" parent="HUD_Elements/WeaponDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 110.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8srk5")
+theme_override_font_sizes/font_size = 20
+text = "weapon"
+
+[node name="ItemsDisplay" type="Node2D" parent="HUD_Elements"]
+position = Vector2(202, 688)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="BG_ItensDysplay" type="NinePatchRect" parent="HUD_Elements/ItemsDisplay"]
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 310.0
+offset_bottom = 120.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(239, 370, 80, 80)
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="ItemsShadow" type="NinePatchRect" parent="HUD_Elements/ItemsDisplay"]
+offset_left = 6.0
+offset_top = 32.0
+offset_right = 294.0
+offset_bottom = 104.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(150, 264, 19, 26)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="ItemsLabelWidget" type="NinePatchRect" parent="HUD_Elements/ItemsDisplay"]
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 310.0
+offset_bottom = 24.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(669, 0, 100, 19)
+patch_margin_left = 17
+patch_margin_top = 4
+patch_margin_right = 37
+patch_margin_bottom = 7
+
+[node name="ItemsWidget" type="NinePatchRect" parent="HUD_Elements/ItemsDisplay"]
+offset_left = -10.0
+offset_top = 24.0
+offset_right = 310.0
+offset_bottom = 120.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(669, 17, 100, 95)
+patch_margin_left = 17
+patch_margin_top = 4
+patch_margin_right = 37
+patch_margin_bottom = 7
+
+[node name="Label" type="Label" parent="HUD_Elements/ItemsDisplay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 70.0
+offset_top = -8.0
+offset_right = 197.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8srk5")
+theme_override_font_sizes/font_size = 32
+text = "techs"
+horizontal_alignment = 1
+
+[node name="CharaDisplay" type="Node2D" parent="HUD_Elements"]
+
+[node name="SpaceParts087" type="Sprite2D" parent="HUD_Elements/CharaDisplay"]
+position = Vector2(112, -16)
+scale = Vector2(2.52586, 1.96429)
+texture = ExtResource("4_t7xeg")
+
+[node name="SpaceParts088" type="Sprite2D" parent="HUD_Elements/CharaDisplay"]
+position = Vector2(432, -208)
+rotation = 1.5708
+scale = Vector2(2.52586, 1.96429)
+texture = ExtResource("4_t7xeg")
+
+[node name="SpaceStation006" type="Sprite2D" parent="HUD_Elements/CharaDisplay"]
+position = Vector2(347.5, -60.4286)
+scale = Vector2(2.39286, 2.39286)
+texture = ExtResource("5_qv14y")
+
+[node name="Head" type="Sprite2D" parent="HUD_Elements/CharaDisplay"]
+position = Vector2(347, -65)
+scale = Vector2(1.62, 1.62)
+texture = ExtResource("6_bvhj7")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HUD_Elements/CharaDisplay"]
+offset_left = 253.0
+offset_top = -161.0
+offset_right = 437.0
+offset_bottom = 31.0
+texture = ExtResource("1_6lalk")
+region_rect = Rect2(559, 12, 100, 100)
+patch_margin_left = 16
+patch_margin_top = 15
+patch_margin_right = 16
+patch_margin_bottom = 15

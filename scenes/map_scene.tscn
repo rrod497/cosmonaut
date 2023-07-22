@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://cm1vhsmhpclfa"]
+
+[ext_resource type="Texture2D" uid="uid://dhonvnc3moc44" path="res://art/Backgrounds/black.png" id="1_mf0sr"]
+[ext_resource type="Texture2D" uid="uid://dfbbyuuxmpchr" path="res://art/Station/spaceStation_021.png" id="2_xjsxf"]
+[ext_resource type="Texture2D" uid="uid://dl1eivh43p75" path="res://art/Planets/planet00.png" id="3_ywv3q"]
+[ext_resource type="Texture2D" uid="uid://cdlyuen8ldgge" path="res://art/Planets/planet05.png" id="4_o435w"]
+[ext_resource type="Texture2D" uid="uid://dq5ncps6iso7c" path="res://art/Planets/planet04.png" id="5_r78wr"]
+[ext_resource type="Texture2D" uid="uid://brc6w7dgmhbdy" path="res://art/Planets/planet02.png" id="6_1bm50"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ho1c5"]
+size = Vector2(448, 960)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(224, 480)
+shape = SubResource("RectangleShape2D_ho1c5")
+
+[node name="BG" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Black" type="Sprite2D" parent="BG"]
+position = Vector2(128, 128)
+texture = ExtResource("1_mf0sr")
+
+[node name="Black2" type="Sprite2D" parent="BG"]
+position = Vector2(384, 128)
+texture = ExtResource("1_mf0sr")
+flip_v = true
+
+[node name="Black3" type="Sprite2D" parent="BG"]
+position = Vector2(128, 384)
+texture = ExtResource("1_mf0sr")
+flip_h = true
+
+[node name="Black4" type="Sprite2D" parent="BG"]
+position = Vector2(384, 384)
+texture = ExtResource("1_mf0sr")
+flip_v = true
+
+[node name="Black5" type="Sprite2D" parent="BG"]
+position = Vector2(128, 640)
+texture = ExtResource("1_mf0sr")
+
+[node name="Black6" type="Sprite2D" parent="BG"]
+position = Vector2(384, 640)
+texture = ExtResource("1_mf0sr")
+flip_v = true
+
+[node name="Black7" type="Sprite2D" parent="BG"]
+position = Vector2(128, 896)
+texture = ExtResource("1_mf0sr")
+flip_h = true
+
+[node name="Black8" type="Sprite2D" parent="BG"]
+position = Vector2(384, 896)
+texture = ExtResource("1_mf0sr")
+flip_v = true
+
+[node name="Stage00" type="Node2D" parent="."]
+
+[node name="SpaceStation" type="Sprite2D" parent="Stage00"]
+position = Vector2(378, 932)
+rotation = 0.364194
+scale = Vector2(0.517442, 0.517442)
+texture = ExtResource("2_xjsxf")
+
+[node name="Stage01" type="Node2D" parent="."]
+
+[node name="Planet00" type="Sprite2D" parent="Stage01"]
+position = Vector2(224, 793)
+rotation = -0.192254
+scale = Vector2(0.0729686, 0.0729686)
+texture = ExtResource("3_ywv3q")
+
+[node name="Stage02" type="Node2D" parent="."]
+
+[node name="Planet01" type="Sprite2D" parent="Stage02"]
+position = Vector2(391, 638)
+scale = Vector2(0.059375, 0.059375)
+texture = ExtResource("4_o435w")
+
+[node name="Planet02" type="Sprite2D" parent="Stage02"]
+position = Vector2(130, 606)
+scale = Vector2(0.101563, 0.101563)
+texture = ExtResource("5_r78wr")
+
+[node name="Stage03" type="Node2D" parent="."]
+
+[node name="Planet03" type="Sprite2D" parent="Stage03"]
+position = Vector2(256, 395)
+scale = Vector2(0.153125, 0.153125)
+texture = ExtResource("6_1bm50")
