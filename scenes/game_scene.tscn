@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmoyegcvkkgef"]
+[gd_scene load_steps=10 format=3 uid="uid://bgjfwtbpqqncm"]
 
-[ext_resource type="Texture2D" uid="uid://b7p6434pke4ot" path="res://art/UI/uipackSpace_vector.svg" id="1_6lalk"]
-[ext_resource type="FontFile" uid="uid://minpw0dtma68" path="res://art/Fonts/kenvector_future.ttf" id="2_8srk5"]
-[ext_resource type="FontFile" uid="uid://3ywy2kq3warx" path="res://art/Fonts/Kenney Rocket Square.ttf" id="3_ih0ud"]
-[ext_resource type="Texture2D" uid="uid://c0bf2ofdm7tkl" path="res://art/UI/spaceParts_087.png" id="4_t7xeg"]
-[ext_resource type="Texture2D" uid="uid://ba1qv7w43y2ks" path="res://art/UI/spaceStation_006.png" id="5_qv14y"]
-[ext_resource type="Texture2D" uid="uid://ckfy0sclj0ruc" path="res://art/Characters/head.png" id="6_bvhj7"]
+[ext_resource type="Texture2D" uid="uid://bjpwbmpu5cpru" path="res://art/ui/uipackSpace_vector.svg" id="1_6lalk"]
+[ext_resource type="PackedScene" uid="uid://b5rn8w3q10x2s" path="res://scenes/action_game.tscn" id="2_0cgqf"]
+[ext_resource type="FontFile" uid="uid://cqrm6pr3recvr" path="res://art/Fonts/kenvector_future.ttf" id="2_8srk5"]
+[ext_resource type="FontFile" uid="uid://jeuex6k6bwru" path="res://art/Fonts/Kenney Rocket Square.ttf" id="3_ih0ud"]
+[ext_resource type="PackedScene" uid="uid://bwepradne0fqs" path="res://scenes/map_scene.tscn" id="3_km7uj"]
+[ext_resource type="Texture2D" uid="uid://bv2exs141hmx0" path="res://art/ui/spaceParts_087.png" id="4_t7xeg"]
+[ext_resource type="Texture2D" uid="uid://bkbpf4n07yi5j" path="res://art/ui/spaceStation_006.png" id="5_qv14y"]
+[ext_resource type="Texture2D" uid="uid://sr6g5kenbo2c" path="res://art/Characters/head.png" id="6_bvhj7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a4vse"]
 atlas = ExtResource("1_6lalk")
@@ -28,10 +30,10 @@ patch_margin_bottom = 20
 axis_stretch_vertical = 2
 
 [node name="BG_SceneDisplay" type="NinePatchRect" parent="HUD_BG"]
-offset_left = 560.0
-offset_top = 64.0
-offset_right = 1360.0
-offset_bottom = 1024.0
+offset_left = 486.0
+offset_top = 48.0
+offset_right = 1318.0
+offset_bottom = 1040.0
 texture = ExtResource("1_6lalk")
 region_rect = Rect2(239, 370, 80, 80)
 patch_margin_left = 20
@@ -40,12 +42,15 @@ patch_margin_right = 20
 patch_margin_bottom = 20
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
+
+[node name="action_game" parent="HUD_BG/BG_SceneDisplay" instance=ExtResource("2_0cgqf")]
+position = Vector2(16, 16)
 
 [node name="BG_MapDisplay" type="NinePatchRect" parent="HUD_BG"]
-offset_left = 1408.0
-offset_top = 64.0
-offset_right = 1856.0
-offset_bottom = 1024.0
+offset_left = 1368.0
+offset_top = 48.0
+offset_right = 1848.0
+offset_bottom = 1040.0
 texture = ExtResource("1_6lalk")
 region_rect = Rect2(239, 370, 80, 80)
 patch_margin_left = 20
@@ -55,8 +60,11 @@ patch_margin_bottom = 20
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
+[node name="Node2D" parent="HUD_BG/BG_MapDisplay" instance=ExtResource("3_km7uj")]
+position = Vector2(16, 16)
+
 [node name="HUD_Elements" type="Node2D" parent="."]
-position = Vector2(24, 216)
+position = Vector2(-104, 216)
 
 [node name="HPDisplay" type="Node2D" parent="HUD_Elements"]
 position = Vector2(200, 72)
@@ -513,3 +521,4 @@ patch_margin_left = 16
 patch_margin_top = 15
 patch_margin_right = 16
 patch_margin_bottom = 15
+metadata/_edit_use_anchors_ = true

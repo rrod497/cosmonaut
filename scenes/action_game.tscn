@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://b5rn8w3q10x2s"]
+
+[ext_resource type="Script" path="res://scenes/action_game.gd" id="1_ak05r"]
+[ext_resource type="PackedScene" uid="uid://b8d5qitc3sv5w" path="res://scenes/player.tscn" id="2_xakny"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3pqc3"]
+size = Vector2(800, 960)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_opcbo"]
+b = Vector2(0, 960)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_63lpn"]
+a = Vector2(800, 0)
+b = Vector2(800, 960)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mr56y"]
+b = Vector2(800, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ikou8"]
+a = Vector2(0, 960)
+b = Vector2(800, 960)
+
+[node name="action_game" type="Node2D"]
+script = ExtResource("1_ak05r")
+asteroids = null
+
+[node name="player_area" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="player_area"]
+position = Vector2(400, 480)
+shape = SubResource("RectangleShape2D_3pqc3")
+
+[node name="bounds" type="StaticBody2D" parent="player_area"]
+collision_layer = 128
+collision_mask = 2
+
+[node name="left" type="CollisionShape2D" parent="player_area/bounds"]
+shape = SubResource("SegmentShape2D_opcbo")
+
+[node name="right" type="CollisionShape2D" parent="player_area/bounds"]
+shape = SubResource("SegmentShape2D_63lpn")
+
+[node name="top" type="CollisionShape2D" parent="player_area/bounds"]
+shape = SubResource("SegmentShape2D_mr56y")
+
+[node name="bottom" type="CollisionShape2D" parent="player_area/bounds"]
+shape = SubResource("SegmentShape2D_ikou8")
+
+[node name="player" parent="." instance=ExtResource("2_xakny")]
+position = Vector2(400, 800)
+scale = Vector2(0.4, 0.4)
+
+[node name="asteroid_spawn" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="asteroid_spawn" to="." method="_on_asteroid_spawn_timeout"]

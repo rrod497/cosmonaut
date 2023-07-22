@@ -1,25 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://cm1vhsmhpclfa"]
+[gd_scene load_steps=8 format=3 uid="uid://bwepradne0fqs"]
 
-[ext_resource type="Texture2D" uid="uid://dhonvnc3moc44" path="res://art/Backgrounds/black.png" id="1_mf0sr"]
-[ext_resource type="Texture2D" uid="uid://dfbbyuuxmpchr" path="res://art/Station/spaceStation_021.png" id="2_xjsxf"]
-[ext_resource type="Texture2D" uid="uid://dl1eivh43p75" path="res://art/Planets/planet00.png" id="3_ywv3q"]
-[ext_resource type="Texture2D" uid="uid://cdlyuen8ldgge" path="res://art/Planets/planet05.png" id="4_o435w"]
-[ext_resource type="Texture2D" uid="uid://dq5ncps6iso7c" path="res://art/Planets/planet04.png" id="5_r78wr"]
-[ext_resource type="Texture2D" uid="uid://brc6w7dgmhbdy" path="res://art/Planets/planet02.png" id="6_1bm50"]
+[ext_resource type="Texture2D" uid="uid://bfuc0tiy0jsic" path="res://art/Backgrounds/black.png" id="1_mf0sr"]
+[ext_resource type="Texture2D" uid="uid://cnh6sn2id5qcu" path="res://art/Station/spaceStation_021.png" id="2_xjsxf"]
+[ext_resource type="Texture2D" uid="uid://crn1mm6xomhkv" path="res://art/Planets/planet00.png" id="3_ywv3q"]
+[ext_resource type="Texture2D" uid="uid://b81xdc072w6ax" path="res://art/Planets/planet05.png" id="4_o435w"]
+[ext_resource type="Texture2D" uid="uid://cqkag701shgvs" path="res://art/Planets/planet04.png" id="5_r78wr"]
+[ext_resource type="Texture2D" uid="uid://d4ln38x8copra" path="res://art/Planets/planet02.png" id="6_1bm50"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ho1c5"]
 size = Vector2(448, 960)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(224, 480)
-shape = SubResource("RectangleShape2D_ho1c5")
-
 [node name="BG" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
+scale = Vector2(0.87017, 0.943846)
 
 [node name="Black" type="Sprite2D" parent="BG"]
 position = Vector2(128, 128)
@@ -62,7 +56,7 @@ flip_v = true
 [node name="Stage00" type="Node2D" parent="."]
 
 [node name="SpaceStation" type="Sprite2D" parent="Stage00"]
-position = Vector2(378, 932)
+position = Vector2(361, 867)
 rotation = 0.364194
 scale = Vector2(0.517442, 0.517442)
 texture = ExtResource("2_xjsxf")
@@ -70,7 +64,7 @@ texture = ExtResource("2_xjsxf")
 [node name="Stage01" type="Node2D" parent="."]
 
 [node name="Planet00" type="Sprite2D" parent="Stage01"]
-position = Vector2(224, 793)
+position = Vector2(183.763, 727)
 rotation = -0.192254
 scale = Vector2(0.0729686, 0.0729686)
 texture = ExtResource("3_ywv3q")
@@ -78,18 +72,25 @@ texture = ExtResource("3_ywv3q")
 [node name="Stage02" type="Node2D" parent="."]
 
 [node name="Planet01" type="Sprite2D" parent="Stage02"]
-position = Vector2(391, 638)
+position = Vector2(350.763, 572)
 scale = Vector2(0.059375, 0.059375)
 texture = ExtResource("4_o435w")
 
 [node name="Planet02" type="Sprite2D" parent="Stage02"]
-position = Vector2(130, 606)
+position = Vector2(121, 399)
 scale = Vector2(0.101563, 0.101563)
 texture = ExtResource("5_r78wr")
 
 [node name="Stage03" type="Node2D" parent="."]
 
 [node name="Planet03" type="Sprite2D" parent="Stage03"]
-position = Vector2(256, 395)
+position = Vector2(283, 159)
 scale = Vector2(0.153125, 0.153125)
 texture = ExtResource("6_1bm50")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(224, 480)
+shape = SubResource("RectangleShape2D_ho1c5")

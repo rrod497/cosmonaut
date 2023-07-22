@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://byl0kt0j4x36c"]
+
+[ext_resource type="PackedScene" uid="uid://cxgdatkn6ornt" path="res://scenes/asteroids/asteroid.tscn" id="1_wd2p6"]
+[ext_resource type="Texture2D" uid="uid://ctyrhofnh0nwq" path="res://art/asteroids/meteorBrown_big3.png" id="2_47fsq"]
+
+[node name="asteroid_L3" instance=ExtResource("1_wd2p6")]
+size = 2
+
+[node name="collider" parent="." index="0"]
+polygon = PackedVector2Array(-43, -18, -10, -38, 27, -28, 44, 1, 21, 40, -29, 33, -42, 13)
+
+[node name="sprite" parent="." index="1"]
+texture = ExtResource("2_47fsq")

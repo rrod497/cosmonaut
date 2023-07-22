@@ -1,0 +1,218 @@
+[gd_scene load_steps=13 format=3 uid="uid://cxgdatkn6ornt"]
+
+[ext_resource type="Script" path="res://scenes/asteroids/asteroid.gd" id="1_wf0g2"]
+[ext_resource type="Resource" uid="uid://d36tx5t3phqmo" path="res://scenes/asteroids/asteroid_prefs_L.tres" id="2_0jrtl"]
+[ext_resource type="Texture2D" uid="uid://dtwe1raf45ipf" path="res://art/asteroids/meteorBrown_big1.png" id="2_r5b3o"]
+[ext_resource type="Texture2D" uid="uid://bkk32xf1r5djb" path="res://art/asteroids/spaceMeteors_001.png" id="3_65kew"]
+
+[sub_resource type="Animation" id="Animation_po3qa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:skew")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("explosion:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_0rgb4"]
+resource_name = "damage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 1.5, 1.5, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tg4gt"]
+resource_name = "destroy"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.523599]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.301961, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("explosion:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_vnbpj"]
+resource_name = "idle"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q0k0i"]
+_data = {
+"RESET": SubResource("Animation_po3qa"),
+"damage": SubResource("Animation_0rgb4"),
+"destroy": SubResource("Animation_tg4gt"),
+"idle": SubResource("Animation_vnbpj")
+}
+
+[sub_resource type="Gradient" id="Gradient_3ojgs"]
+offsets = PackedFloat32Array(0, 0.334975, 1)
+colors = PackedColorArray(0.999031, 0.848886, 0.837119, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mnj3i"]
+gradient = SubResource("Gradient_3ojgs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0gytc"]
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 0.2
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+linear_accel_min = 1.0
+linear_accel_max = 5.0
+radial_accel_min = 5.0
+radial_accel_max = 10.0
+angle_max = 180.0
+scale_min = 0.05
+scale_max = 0.1
+color_ramp = SubResource("GradientTexture1D_mnj3i")
+
+[node name="asteroid" type="Area2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_wf0g2")
+prefs = ExtResource("2_0jrtl")
+
+[node name="collider" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-48, 10, -33, -40, 23, -40, 49, 0, 34, 33, 10, 28, -21, 40, -48, 10)
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_r5b3o")
+
+[node name="anime" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_q0k0i")
+}
+
+[node name="explosion" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_0gytc")
+texture = ExtResource("3_65kew")
+lifetime = 0.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

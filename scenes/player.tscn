@@ -1,9 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8d5qitc3sv5w"]
+[gd_scene load_steps=24 format=3 uid="uid://b8d5qitc3sv5w"]
 
-[ext_resource type="Texture2D" uid="uid://vodsjv2pnnsu" path="res://art/Ships/spaceShips_003.png" id="1_2je5w"]
+[ext_resource type="Texture2D" uid="uid://vodsjv2pnnsu" path="res://art/ships/spaceShips_003.png" id="1_2je5w"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_bbjwr"]
 [ext_resource type="Script" path="res://scenes/weapon.gd" id="3_gpfny"]
-[ext_resource type="Texture2D" uid="uid://dkfipxmcdxe5f" path="res://art/Effects/spaceEffects_010.png" id="4_fuj6s"]
+[ext_resource type="Texture2D" uid="uid://dkfipxmcdxe5f" path="res://art/sfx/spaceEffects_010.png" id="4_xce1q"]
+[ext_resource type="Texture2D" uid="uid://c2ewdn2wtrew3" path="res://art/damage/playerShip1_damage3.png" id="5_wxlpq"]
+[ext_resource type="Texture2D" uid="uid://dnubf07xpiarx" path="res://art/damage/playerShip1_damage2.png" id="6_ouq3v"]
+[ext_resource type="Texture2D" uid="uid://c6bgj0pt42afu" path="res://art/damage/playerShip1_damage1.png" id="7_3xf6p"]
+[ext_resource type="Texture2D" uid="uid://blwu7owtxc8pp" path="res://art/sfx/explosion/Explosion/explosion00.png" id="8_oshj2"]
+[ext_resource type="Texture2D" uid="uid://diqsp2m2obwy5" path="res://art/sfx/explosion/Explosion/explosion08.png" id="9_nf272"]
+[ext_resource type="Texture2D" uid="uid://ck1svnpy658ct" path="res://art/sfx/explosion/Explosion/explosion07.png" id="10_r7ddc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2upog"]
 blend_mode = 1
@@ -31,33 +37,281 @@ color_ramp = SubResource("GradientTexture1D_x8w6y")
 hue_variation_max = 0.25
 anim_offset_max = 0.5
 
+[sub_resource type="Animation" id="Animation_acbsi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ship:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ship:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_2je5w")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ship:flip_v")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("thruster/emitter:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("explosion:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ship:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ship:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_4y0y4"]
+resource_name = "damage"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ship:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.498039, 0.498039, 1), Color(1, 1, 1, 1), Color(1, 0.498039, 0.498039, 1), Color(1, 1, 1, 1), Color(1, 0.498039, 0.498039, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_osk5u"]
+resource_name = "destroy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ship:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_wxlpq"), ExtResource("6_ouq3v"), ExtResource("7_3xf6p"), null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ship:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("thruster/emitter:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("explosion:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ship:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ship:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(4, 4)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ship:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.498039, 0.498039, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7k5o1"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k6xyb"]
+_data = {
+"RESET": SubResource("Animation_acbsi"),
+"damage": SubResource("Animation_4y0y4"),
+"destroy": SubResource("Animation_osk5u"),
+"idle": SubResource("Animation_7k5o1")
+}
+
+[sub_resource type="Gradient" id="Gradient_wqgxk"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_epcsn"]
+gradient = SubResource("Gradient_wqgxk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y15lf"]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 360.0
+scale_min = 0.1
+scale_max = 0.4
+color_ramp = SubResource("GradientTexture1D_epcsn")
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_6sqfc"]
+frames = 3
+frame_0/texture = ExtResource("8_oshj2")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("9_nf272")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("10_r7ddc")
+frame_2/duration = 0.1
+
 [node name="player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 504
 script = ExtResource("1_bbjwr")
 
 [node name="ship" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("1_2je5w")
 flip_v = true
 
 [node name="collider" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-50, 45, 50, 45, 25, -45, -25, -45)
+polygon = PackedVector2Array(-100, 85, 98, 85, 50, -85, -50, -85)
 
 [node name="weapon" type="Node2D" parent="."]
 script = ExtResource("3_gpfny")
 
 [node name="muzzle" type="Marker2D" parent="weapon"]
-position = Vector2(0, -60)
+position = Vector2(0, -120)
 
 [node name="thruster" type="Node2D" parent="."]
-position = Vector2(0, 56)
+position = Vector2(0, 100)
 
 [node name="emitter" type="GPUParticles2D" parent="thruster"]
 material = SubResource("CanvasItemMaterial_2upog")
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_b2em1")
-texture = ExtResource("4_fuj6s")
+texture = ExtResource("4_xce1q")
 lifetime = 2.0
 speed_scale = 2.0
 explosiveness = 0.15
 randomness = 0.2
+
+[node name="anime" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_k6xyb")
+}
+
+[node name="explosion" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_y15lf")
+texture = SubResource("AnimatedTexture_6sqfc")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+randomness = 0.5
 
 [connection signal="fired" from="." to="weapon" method="_on_player_fired"]

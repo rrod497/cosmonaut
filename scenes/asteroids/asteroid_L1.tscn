@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://wa8a5d5awjkx"]
+
+[ext_resource type="PackedScene" uid="uid://cxgdatkn6ornt" path="res://scenes/asteroids/asteroid.tscn" id="1_326ux"]
+
+[node name="asteroid_L1" instance=ExtResource("1_326ux")]
+size = 2

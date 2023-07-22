@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AsteroidPrefs" load_steps=2 format=3 uid="uid://brva1u445hi5e"]
+
+[ext_resource type="Script" path="res://scenes/asteroids/asteroid_prefs.gd" id="1_giheu"]
+
+[resource]
+script = ExtResource("1_giheu")
+max_hits = 1
+scale = 2
+max_spin = 5
+min_speed = 62
+max_speed = 175
+damage = 2
+min_debris = 1
+max_debris = 3
