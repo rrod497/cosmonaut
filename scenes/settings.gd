@@ -7,6 +7,9 @@ extends Node
 @export var asteroids_XL: Array[PackedScene]
 @export var loot: Array[PackedScene]
 @export var mineral: PackedScene
+@export var weapons: Array[PackedScene]
+
+
 
 @onready var _ast_dict = {
   Asteroid.Size.S: asteroids_S,

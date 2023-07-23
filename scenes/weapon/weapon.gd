@@ -12,7 +12,7 @@ func shoot():
 func fire(muzzle):
   var bullet = projectile.instantiate()
   game_state.action.add_child(bullet)
-  bullet.start(muzzle.global_position)
+  bullet.start(muzzle.global_position, muzzle.dir)
 
 func _on_player_fire():
   if !active: return

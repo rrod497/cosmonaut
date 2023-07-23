@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bgjfwtbpqqncm"]
+[gd_scene load_steps=20 format=3 uid="uid://bgjfwtbpqqncm"]
 
 [ext_resource type="Texture2D" uid="uid://bjpwbmpu5cpru" path="res://art/ui/uipackSpace_vector.svg" id="1_6lalk"]
 [ext_resource type="Script" path="res://scenes/game_scene.gd" id="1_vowot"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bwvbjm7qag3hm" path="res://art/powerups/shield_silver.png" id="7_ck8ye"]
 [ext_resource type="Texture2D" uid="uid://co7yhwb44bh3" path="res://art/powerups/things_silver.png" id="8_js17y"]
 [ext_resource type="Texture2D" uid="uid://d2vdtlpu7rff3" path="res://art/powerups/things_gold.png" id="9_1d60w"]
+[ext_resource type="FontFile" uid="uid://dusnfdsf7hw2a" path="res://art/Fonts/Kenney Blocks.ttf" id="15_u4wax"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a4vse"]
 atlas = ExtResource("1_6lalk")
@@ -692,8 +693,45 @@ position = Vector2(347, -65)
 scale = Vector2(1.62, 1.62)
 texture = ExtResource("6_bvhj7")
 
+[node name="HUD_gamestate" type="Node2D" parent="HUD_Elements"]
+
+[node name="gameover" type="Label" parent="HUD_Elements/HUD_gamestate"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 720.0
+offset_top = 216.0
+offset_right = 1296.0
+offset_bottom = 464.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.458824, 0.435294, 0.415686, 1)
+theme_override_fonts/font = ExtResource("15_u4wax")
+theme_override_font_sizes/font_size = 68
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="newgame" type="Button" parent="HUD_Elements/HUD_gamestate"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 720.0
+offset_top = 216.0
+offset_right = 1296.0
+offset_bottom = 464.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.458824, 0.435294, 0.415686, 1)
+theme_override_fonts/font = ExtResource("15_u4wax")
+theme_override_font_sizes/font_size = 68
+text = "NEW GAME"
+
 [connection signal="equip_changed" from="HUD_BG/BG_SceneDisplay/action_scene" to="." method="_on_action_scene_equip_changed"]
 [connection signal="fuel_changed" from="HUD_BG/BG_SceneDisplay/action_scene" to="." method="_on_action_scene_fuel_changed"]
+[connection signal="gameover" from="HUD_BG/BG_SceneDisplay/action_scene" to="." method="_on_action_scene_gameover"]
 [connection signal="minerals_changed" from="HUD_BG/BG_SceneDisplay/action_scene" to="." method="_on_action_scene_minerals_changed"]
 [connection signal="player_hp_changed" from="HUD_BG/BG_SceneDisplay/action_scene" to="." method="_on_action_scene_player_hp_changed"]
 [connection signal="shield_changed" from="HUD_BG/BG_SceneDisplay/action_scene" to="." method="_on_action_scene_shield_changed"]
+[connection signal="pressed" from="HUD_Elements/HUD_gamestate/newgame" to="." method="_on_newgame_pressed"]

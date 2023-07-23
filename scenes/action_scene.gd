@@ -6,6 +6,7 @@ signal fuel_changed(remaining)
 signal minerals_changed(kind, amount)
 signal equip_changed(level)
 signal shield_changed(state)
+signal gameover
 
 @export var asteroids : Array[PackedScene]
 var _running = false
@@ -20,7 +21,17 @@ var time = 100
 func _ready():
   game_state.player = $player
   game_state.action = self
+  $player.visible = false
+  $player.set_deferred("monitoring", false)
+  $player/collider.set_deferred("disabled", true)
+
+func start():
   _running = true
+  $clock.start()
+  $asteroid_spawn.start()
+  $player.visible = true
+  $player.set_deferred("monitoring", true)
+  $player/collider.set_deferred("disabled", false)
 
 func _on_asteroid_spawn_timeout():
   var asteroid = settings.get_asteroids().pick_random().instantiate()
@@ -47,7 +58,8 @@ func _on_player_collected(stuff, amount = 1):
   elif stuff is PowerUp:
     var powerup = stuff as PowerUp
     if powerup.kind == "weapon":
-      game_state.weapon_level = min(game_state.weapon_level + 1, 5)
+      game_state.weapon_level = min(game_state.weapon_level + 1, 4)
+      $player.level_weapon(game_state.weapon_level)
       equip_changed.emit(game_state.weapon_level)
     elif powerup.kind == "shield":
       $player.put_shield()
@@ -70,3 +82,7 @@ func _on_visible_area_exited(area):
 
 func _on_player_shield_onoff(state):
   shield_changed.emit(state)
+
+
+func _on_player_destroyed():
+  gameover.emit()

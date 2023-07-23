@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctvdh67cfmdp2"]
+[gd_scene load_steps=4 format=3 uid="uid://ctvdh67cfmdp2"]
 
 [ext_resource type="Script" path="res://scenes/weapon/weapon.gd" id="1_mw4wv"]
 [ext_resource type="PackedScene" uid="uid://kograic2lq3w" path="res://scenes/weapon/missile.tscn" id="2_hgemw"]
+[ext_resource type="Script" path="res://scenes/weapon/muzzle.gd" id="3_nphga"]
 
 [node name="weapon" type="Node2D"]
 script = ExtResource("1_mw4wv")
@@ -11,9 +12,4 @@ projectile = ExtResource("2_hgemw")
 
 [node name="muzzle01" type="Marker2D" parent="muzzles"]
 position = Vector2(0, -120)
-
-[node name="muzzle02" type="Marker2D" parent="muzzles"]
-position = Vector2(-60, -120)
-
-[node name="muzzle03" type="Marker2D" parent="muzzles"]
-position = Vector2(60, -120)
+script = ExtResource("3_nphga")

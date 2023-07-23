@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cfmq8wpus8ikm"]
+[gd_scene load_steps=11 format=3 uid="uid://codviy52lksnr"]
 
 [ext_resource type="Shader" path="res://scenes/action_scene.gdshader" id="2_tpljg"]
 [ext_resource type="PackedScene" uid="uid://b8d5qitc3sv5w" path="res://scenes/player.tscn" id="2_xakny"]
@@ -20,6 +20,8 @@ func _on_asteroid_spawn_timeout():
   a.rotation = rotation
   a.direction = Vector2(0, 1)
 #  a.direction = Vector2(randf_range(-1, 1), 1).normalized()
+
+
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ksjsy"]
@@ -87,4 +89,5 @@ scale = Vector2(0.4, 0.4)
 wait_time = 2.0
 autostart = true
 
+[connection signal="destroyed" from="player" to="." method="_on_player_destroyed"]
 [connection signal="timeout" from="asteroid_spawn" to="." method="_on_asteroid_spawn_timeout"]

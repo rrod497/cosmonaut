@@ -3,14 +3,16 @@ extends Area2D
 @export var prefs : ProjectilePrefs
 @onready var damage = prefs.damage
 @onready var _speed = prefs.speed
+var _dir = Vector2(0,-1)
 
-func start(pos):
+func start(pos, dir):
   global_position = pos
+  _dir = dir.normalized()
 #  position = pos
   $spawn.emitting = true
 
 func _process(delta):
-  position.y -= delta * _speed
+  position += delta * _dir * _speed
 
 func _on_visible_screen_exited():
   queue_free()

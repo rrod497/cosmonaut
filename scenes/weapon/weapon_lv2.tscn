@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://63qkpx32ho6d"]
+
+[ext_resource type="PackedScene" uid="uid://ctvdh67cfmdp2" path="res://scenes/weapon/weapon.tscn" id="1_7e32a"]
+[ext_resource type="Script" path="res://scenes/weapon/muzzle.gd" id="2_flach"]
+
+[node name="weapon_lv2" instance=ExtResource("1_7e32a")]
+
+[node name="muzzle01" parent="muzzles" index="0"]
+position = Vector2(-30, -120)
+
+[node name="muzzle02" type="Marker2D" parent="muzzles" index="1"]
+position = Vector2(30, -120)
+script = ExtResource("2_flach")

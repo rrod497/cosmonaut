@@ -84,12 +84,24 @@ content = ExtResource("6_6t1jw")
 [node name="powerup_fuel" parent="." instance=ExtResource("6_tty3p")]
 position = Vector2(164, 314)
 
+[node name="powerup_missile2" parent="." instance=ExtResource("7_p2t0q")]
+position = Vector2(556, 322)
+content = ExtResource("6_6t1jw")
+
+[node name="powerup_missile3" parent="." instance=ExtResource("7_p2t0q")]
+position = Vector2(556, 322)
+content = ExtResource("6_6t1jw")
+
+[node name="powerup_missile4" parent="." instance=ExtResource("7_p2t0q")]
+position = Vector2(556, 322)
+content = ExtResource("6_6t1jw")
+
 [node name="powerup_missile" parent="." instance=ExtResource("7_p2t0q")]
 position = Vector2(278, 161)
 content = ExtResource("6_6t1jw")
 
 [connection signal="area_exited" from="visible" to="." method="_on_visible_area_exited"]
-[connection signal="collected" from="player" to="." method="_on_player_collected"]
+[connection signal="destroyed" from="player" to="." method="_on_player_destroyed"]
 [connection signal="hp_changed" from="player" to="." method="_on_player_hp_changed"]
 [connection signal="shield_onoff" from="player" to="." method="_on_player_shield_onoff"]
 [connection signal="timeout" from="asteroid_spawn" to="." method="_on_asteroid_spawn_timeout"]

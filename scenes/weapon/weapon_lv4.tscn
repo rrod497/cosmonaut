@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ku6n7a3wjf06"]
+
+[ext_resource type="PackedScene" uid="uid://ctvdh67cfmdp2" path="res://scenes/weapon/weapon.tscn" id="1_byhvi"]
+[ext_resource type="Script" path="res://scenes/weapon/muzzle.gd" id="2_8exj7"]
+
+[node name="weapon_lv4" instance=ExtResource("1_byhvi")]
+
+[node name="muzzle02" type="Marker2D" parent="muzzles" index="1"]
+position = Vector2(-45, -120)
+script = ExtResource("2_8exj7")
+
+[node name="muzzle03" type="Marker2D" parent="muzzles" index="2"]
+position = Vector2(45, -120)
+script = ExtResource("2_8exj7")
+
+[node name="muzzle04" type="Marker2D" parent="muzzles" index="3"]
+position = Vector2(-90, -120)
+script = ExtResource("2_8exj7")
+dir = Vector2(-0.5, -1)
+
+[node name="muzzle05" type="Marker2D" parent="muzzles" index="4"]
+position = Vector2(90, -120)
+script = ExtResource("2_8exj7")
+dir = Vector2(0.5, -1)

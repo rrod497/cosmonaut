@@ -32,3 +32,13 @@ func _on_action_scene_minerals_changed(kind, amount):
 
 func _on_action_scene_shield_changed(state):
   shield.visible = state
+
+func _on_newgame_pressed():
+  $HUD_Elements/HUD_gamestate/newgame.visible = false
+  $HUD_BG/BG_SceneDisplay/action_scene.start()
+
+func _on_action_scene_gameover():
+  $HUD_Elements/HUD_gamestate/gameover.visible = true
+  await get_tree().create_timer(3000).timeout
+  $HUD_Elements/HUD_gamestate/gameover.visible = false
+  $HUD_Elements/HUD_gamestate/newgame.visible = true

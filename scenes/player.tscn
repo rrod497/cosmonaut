@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://vodsjv2pnnsu" path="res://art/ships/spaceShips_003.png" id="1_2je5w"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_bbjwr"]
 [ext_resource type="PackedScene" uid="uid://dsuvhhdnm7gho" path="res://scenes/shield.tscn" id="3_j3j0v"]
-[ext_resource type="PackedScene" uid="uid://ctvdh67cfmdp2" path="res://scenes/weapon/weapon.tscn" id="3_xqcfg"]
 [ext_resource type="Texture2D" uid="uid://dkfipxmcdxe5f" path="res://art/sfx/spaceEffects_010.png" id="4_xce1q"]
 [ext_resource type="Texture2D" uid="uid://c2ewdn2wtrew3" path="res://art/damage/playerShip1_damage3.png" id="5_wxlpq"]
 [ext_resource type="Texture2D" uid="uid://dnubf07xpiarx" path="res://art/damage/playerShip1_damage2.png" id="6_ouq3v"]
@@ -12,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://diqsp2m2obwy5" path="res://art/sfx/explosion/Explosion/explosion08.png" id="9_nf272"]
 [ext_resource type="Texture2D" uid="uid://ck1svnpy658ct" path="res://art/sfx/explosion/Explosion/explosion07.png" id="10_r7ddc"]
 [ext_resource type="Texture2D" uid="uid://bjurlf1ea8mj5" path="res://art/sfx/star_07.png" id="11_58kex"]
+[ext_resource type="PackedScene" uid="uid://x4qsagll1ea" path="res://scenes/weapon/weapon_lv1.tscn" id="12_bgvsf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhb2c"]
 radius = 400.0
@@ -402,7 +402,7 @@ randomness = 0.3
 
 [node name="weapons" type="Node2D" parent="."]
 
-[node name="weapon" parent="weapons" instance=ExtResource("3_xqcfg")]
+[node name="weapon_lv1" parent="weapons" instance=ExtResource("12_bgvsf")]
 
 [node name="shield_timespan" type="Timer" parent="."]
 wait_time = 20.0

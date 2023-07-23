@@ -17,6 +17,7 @@ signal shield_onoff(state)
 #@export var active_weapon
 
 func _ready():
+  remove_shield()
   var weapons = $weapons.get_children()
   for weapon in weapons:
 #    acquire(weapon)
@@ -37,9 +38,16 @@ func _process(delta):
 #  for i in get_slide_collision_count():
 #    var collision = get_slide_collision(i)
 
+func level_weapon(level):
+  var old_weapon = $weapons.get_children()[0]
+  var new_weapon = settings.weapons[level-1].instantiate()
+  unequip(old_weapon)
+  equip(new_weapon)
+
 func equip(weapon):
   fire.connect(weapon._on_player_fire)
   weapon.active = true
+  $weapons.add_child(weapon)
 #  if !alive: return
 #  weapon.equipped.emit()
 #  equipped.emit(weapon.kind)
@@ -47,6 +55,8 @@ func equip(weapon):
 func unequip(weapon):
   fire.disconnect(weapon._on_player_fire)
   weapon.active = false
+  $weapons.remove_child(weapon)
+  weapon.queue_free()
 #  if !alive: return
 #  weapon.unequipped.emit()
 #  equipped.emit(weapon.kind)
@@ -79,21 +89,21 @@ func collect(stuff, amount):
 func put_shield():
   if !shield:
     shield = true
-    $shield.visible = true
     shield_onoff.emit(shield)
-    $shield.set_deferred("monitoring", true)
-    $shield/collider.set_deferred("disabled", false)
+  $shield.visible = true
+  $shield.set_deferred("monitoring", true)
+  $shield/collider.set_deferred("disabled", false)
   $shield_timespan.stop()
   $shield_timespan.start()
 
 func remove_shield():
   if shield:
     shield = false
-    $shield.visible = false
     shield_onoff.emit(shield)
     $anime.play("damage")
-    $shield.set_deferred("monitoring", false)
-    $shield/collider.set_deferred("disabled", true)
+  $shield.visible = false
+  $shield.set_deferred("monitoring", false)
+  $shield/collider.set_deferred("disabled", true)
   $shield_timespan.stop()
 
 
