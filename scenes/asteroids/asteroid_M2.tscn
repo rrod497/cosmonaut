@@ -13,3 +13,6 @@ polygon = PackedVector2Array(-23, 5, -15, -16, 9, -20, 23, -3, 8, 19, -8, 18)
 
 [node name="sprite" parent="." index="1"]
 texture = ExtResource("2_uj7d0")
+
+[node name="explosion" parent="." index="3"]
+amount = 12

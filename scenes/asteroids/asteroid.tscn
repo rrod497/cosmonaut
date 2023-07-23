@@ -172,12 +172,15 @@ gradient = SubResource("Gradient_3ojgs")
 lifetime_randomness = 0.3
 emission_shape = 1
 emission_sphere_radius = 10.0
+particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
 spread = 180.0
 flatness = 0.2
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 100.0
 initial_velocity_max = 300.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
 linear_accel_min = 1.0
 linear_accel_max = 5.0
 radial_accel_min = 5.0
@@ -187,7 +190,7 @@ scale_min = 0.05
 scale_max = 0.1
 color_ramp = SubResource("GradientTexture1D_mnj3i")
 
-[node name="asteroid" type="Area2D"]
+[node name="asteroid" type="Area2D" groups=["asteroids"]]
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_wf0g2")
@@ -216,3 +219,4 @@ speed_scale = 1.5
 explosiveness = 1.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

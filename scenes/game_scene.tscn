@@ -1,18 +1,34 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgjfwtbpqqncm"]
+[gd_scene load_steps=18 format=3 uid="uid://bgjfwtbpqqncm"]
 
 [ext_resource type="Texture2D" uid="uid://bjpwbmpu5cpru" path="res://art/ui/uipackSpace_vector.svg" id="1_6lalk"]
-[ext_resource type="PackedScene" uid="uid://b5rn8w3q10x2s" path="res://scenes/action_game.tscn" id="2_0cgqf"]
+[ext_resource type="Script" path="res://scenes/game_scene.gd" id="1_vowot"]
 [ext_resource type="FontFile" uid="uid://cqrm6pr3recvr" path="res://art/Fonts/kenvector_future.ttf" id="2_8srk5"]
 [ext_resource type="FontFile" uid="uid://jeuex6k6bwru" path="res://art/Fonts/Kenney Rocket Square.ttf" id="3_ih0ud"]
 [ext_resource type="PackedScene" uid="uid://bwepradne0fqs" path="res://scenes/map_scene.tscn" id="3_km7uj"]
+[ext_resource type="PackedScene" uid="uid://b5rn8w3q10x2s" path="res://scenes/action_scene.tscn" id="3_vwyjh"]
 [ext_resource type="Texture2D" uid="uid://bv2exs141hmx0" path="res://art/ui/spaceParts_087.png" id="4_t7xeg"]
+[ext_resource type="Texture2D" uid="uid://clovmvepc8hku" path="res://art/ui/squareBlue.png" id="5_8hp03"]
 [ext_resource type="Texture2D" uid="uid://bkbpf4n07yi5j" path="res://art/ui/spaceStation_006.png" id="5_qv14y"]
 [ext_resource type="Texture2D" uid="uid://sr6g5kenbo2c" path="res://art/Characters/head.png" id="6_bvhj7"]
+[ext_resource type="Texture2D" uid="uid://cqsq08lpsfbd3" path="res://art/powerups/things_bronze.png" id="7_anstl"]
+[ext_resource type="Texture2D" uid="uid://co7yhwb44bh3" path="res://art/powerups/things_silver.png" id="8_js17y"]
+[ext_resource type="Texture2D" uid="uid://d2vdtlpu7rff3" path="res://art/powerups/things_gold.png" id="9_1d60w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a4vse"]
 atlas = ExtResource("1_6lalk")
 
+[sub_resource type="Gradient" id="Gradient_veql5"]
+offsets = PackedFloat32Array(0, 0.983784)
+colors = PackedColorArray(0.956863, 0.682353, 0.0980392, 1, 0.956863, 0.792157, 0.0980392, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2r8gs"]
+gradient = SubResource("Gradient_veql5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dtwdu"]
+texture = SubResource("GradientTexture1D_2r8gs")
+
 [node name="Game_scene" type="Node2D"]
+script = ExtResource("1_vowot")
 
 [node name="HUD_BG" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -44,7 +60,7 @@ patch_margin_bottom = 20
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="action_game" parent="HUD_BG/BG_SceneDisplay" instance=ExtResource("2_0cgqf")]
+[node name="action_scene" parent="HUD_BG/BG_SceneDisplay" instance=ExtResource("3_vwyjh")]
 position = Vector2(16, 16)
 
 [node name="BG_MapDisplay" type="NinePatchRect" parent="HUD_BG"]
@@ -133,6 +149,82 @@ theme_override_font_sizes/font_size = 32
 text = "HP"
 horizontal_alignment = 1
 
+[node name="hp_bar" type="Control" parent="HUD_Elements/HPDisplay"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="hp1" type="NinePatchRect" parent="HUD_Elements/HPDisplay/hp_bar"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 53.0
+offset_right = 122.0
+offset_bottom = 83.0
+texture = ExtResource("5_8hp03")
+region_rect = Rect2(0, 0, 19, 26)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+
+[node name="hp2" type="NinePatchRect" parent="HUD_Elements/HPDisplay/hp_bar"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 53.0
+offset_right = 162.0
+offset_bottom = 83.0
+texture = ExtResource("5_8hp03")
+region_rect = Rect2(0, 0, 19, 26)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+
+[node name="hp3" type="NinePatchRect" parent="HUD_Elements/HPDisplay/hp_bar"]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 53.0
+offset_right = 202.0
+offset_bottom = 83.0
+texture = ExtResource("5_8hp03")
+region_rect = Rect2(0, 0, 19, 26)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+
+[node name="hp4" type="NinePatchRect" parent="HUD_Elements/HPDisplay/hp_bar"]
+layout_mode = 0
+offset_left = 206.0
+offset_top = 53.0
+offset_right = 242.0
+offset_bottom = 83.0
+texture = ExtResource("5_8hp03")
+region_rect = Rect2(0, 0, 19, 26)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+
+[node name="hp5" type="NinePatchRect" parent="HUD_Elements/HPDisplay/hp_bar"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 53.0
+offset_right = 282.0
+offset_bottom = 83.0
+texture = ExtResource("5_8hp03")
+region_rect = Rect2(0, 0, 19, 26)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+axis_stretch_horizontal = 1
+
 [node name="FuelDisplay" type="Node2D" parent="HUD_Elements"]
 position = Vector2(200, 208)
 metadata/_edit_group_ = true
@@ -191,15 +283,25 @@ theme_override_font_sizes/font_size = 32
 text = "Fuel"
 horizontal_alignment = 1
 
+[node name="fuel_progress" type="ProgressBar" parent="HUD_Elements/FuelDisplay"]
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 280.0
+offset_bottom = 83.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_dtwdu")
+max_value = 60.0
+step = 1.0
+value = 60.0
+rounded = true
+
 [node name="StorageDisplay" type="Node2D" parent="HUD_Elements"]
-position = Vector2(224, 352)
+position = Vector2(200, 352)
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="BG_StorageDisplay" type="NinePatchRect" parent="HUD_Elements/StorageDisplay"]
 offset_left = -8.0
 offset_top = -8.0
-offset_right = 120.0
+offset_right = 168.0
 offset_bottom = 312.0
 texture = ExtResource("1_6lalk")
 region_rect = Rect2(239, 370, 80, 80)
@@ -211,7 +313,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="StorageWidget" type="NinePatchRect" parent="HUD_Elements/StorageDisplay"]
-offset_right = 112.0
+offset_right = 160.0
 offset_bottom = 304.0
 texture = ExtResource("1_6lalk")
 region_rect = Rect2(659, 369, 100, 100)
@@ -225,7 +327,7 @@ axis_stretch_vertical = 2
 [node name="Slot1Shadow" type="NinePatchRect" parent="HUD_Elements/StorageDisplay"]
 offset_left = 16.0
 offset_top = 72.0
-offset_right = 96.0
+offset_right = 144.0
 offset_bottom = 112.0
 texture = ExtResource("1_6lalk")
 region_rect = Rect2(150, 264, 19, 26)
@@ -234,10 +336,30 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
+[node name="bronze" type="Sprite2D" parent="HUD_Elements/StorageDisplay/Slot1Shadow"]
+position = Vector2(20, 20)
+texture = ExtResource("7_anstl")
+
+[node name="amount" type="Label" parent="HUD_Elements/StorageDisplay/Slot1Shadow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8srk5")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+
 [node name="Slot2Shadow" type="NinePatchRect" parent="HUD_Elements/StorageDisplay"]
 offset_left = 16.0
 offset_top = 144.0
-offset_right = 96.0
+offset_right = 144.0
 offset_bottom = 184.0
 texture = ExtResource("1_6lalk")
 region_rect = Rect2(150, 264, 19, 26)
@@ -246,10 +368,30 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
+[node name="silver" type="Sprite2D" parent="HUD_Elements/StorageDisplay/Slot2Shadow"]
+position = Vector2(20, 20)
+texture = ExtResource("8_js17y")
+
+[node name="amount" type="Label" parent="HUD_Elements/StorageDisplay/Slot2Shadow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8srk5")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+
 [node name="Slot3Shadow" type="NinePatchRect" parent="HUD_Elements/StorageDisplay"]
 offset_left = 16.0
 offset_top = 216.0
-offset_right = 96.0
+offset_right = 144.0
 offset_bottom = 256.0
 texture = ExtResource("1_6lalk")
 region_rect = Rect2(150, 264, 19, 26)
@@ -257,6 +399,26 @@ patch_margin_left = 3
 patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
+
+[node name="gold" type="Sprite2D" parent="HUD_Elements/StorageDisplay/Slot3Shadow"]
+position = Vector2(20, 20)
+texture = ExtResource("9_1d60w")
+
+[node name="amount" type="Label" parent="HUD_Elements/StorageDisplay/Slot3Shadow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8srk5")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="HUD_Elements/StorageDisplay"]
 anchors_preset = 15
@@ -273,7 +435,7 @@ theme_override_font_sizes/font_size = 24
 text = "cargo"
 
 [node name="WeaponDisplay" type="Node2D" parent="HUD_Elements"]
-position = Vector2(368, 352)
+position = Vector2(392, 352)
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -506,16 +668,11 @@ position = Vector2(347.5, -60.4286)
 scale = Vector2(2.39286, 2.39286)
 texture = ExtResource("5_qv14y")
 
-[node name="Head" type="Sprite2D" parent="HUD_Elements/CharaDisplay"]
-position = Vector2(347, -65)
-scale = Vector2(1.62, 1.62)
-texture = ExtResource("6_bvhj7")
-
 [node name="NinePatchRect" type="NinePatchRect" parent="HUD_Elements/CharaDisplay"]
 offset_left = 253.0
-offset_top = -161.0
-offset_right = 437.0
-offset_bottom = 31.0
+offset_top = -159.0
+offset_right = 435.0
+offset_bottom = 37.0
 texture = ExtResource("1_6lalk")
 region_rect = Rect2(559, 12, 100, 100)
 patch_margin_left = 16
@@ -523,3 +680,13 @@ patch_margin_top = 15
 patch_margin_right = 16
 patch_margin_bottom = 15
 metadata/_edit_use_anchors_ = true
+
+[node name="Head" type="Sprite2D" parent="HUD_Elements/CharaDisplay"]
+position = Vector2(347, -65)
+scale = Vector2(1.62, 1.62)
+texture = ExtResource("6_bvhj7")
+
+[connection signal="equip_changed" from="HUD_BG/BG_SceneDisplay/action_scene" to="." method="_on_action_scene_equip_changed"]
+[connection signal="fuel_changed" from="HUD_BG/BG_SceneDisplay/action_scene" to="." method="_on_action_scene_fuel_changed"]
+[connection signal="minerals_changed" from="HUD_BG/BG_SceneDisplay/action_scene" to="." method="_on_action_scene_minerals_changed"]
+[connection signal="player_hp_changed" from="HUD_BG/BG_SceneDisplay/action_scene" to="." method="_on_action_scene_player_hp_changed"]

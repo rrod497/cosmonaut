@@ -1,7 +1,31 @@
-[gd_scene load_steps=8 format=3 uid="uid://b5rn8w3q10x2s"]
+[gd_scene load_steps=11 format=3 uid="uid://cfmq8wpus8ikm"]
 
-[ext_resource type="Script" path="res://scenes/action_game.gd" id="1_ak05r"]
+[ext_resource type="Shader" path="res://scenes/action_scene.gdshader" id="2_tpljg"]
 [ext_resource type="PackedScene" uid="uid://b8d5qitc3sv5w" path="res://scenes/player.tscn" id="2_xakny"]
+[ext_resource type="Texture2D" uid="uid://cmq1weukefvud" path="res://art/Backgrounds/BG_Action.png" id="3_fy5a8"]
+
+[sub_resource type="GDScript" id="GDScript_by5pt"]
+script/source = "extends Node2D
+
+@export var asteroids : Array[PackedScene]
+
+func _on_asteroid_spawn_timeout():
+  var a = settings.get_asteroids().pick_random().instantiate()
+  add_child(a)
+#  get_parent().call_deferred(\"add_child\", a)
+  var xposA = $player_area/bounds/top.shape.a.x
+  var xposB = $player_area/bounds/top.shape.b.x
+  a.position.y = $player_area/bounds/top.shape.a.y - 100
+  a.position.x = randf_range(xposA, xposB)
+  a.rotation = rotation
+  a.direction = Vector2(0, 1)
+#  a.direction = Vector2(randf_range(-1, 1), 1).normalized()
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksjsy"]
+shader = ExtResource("2_tpljg")
+shader_parameter/direction = Vector2(0, -1)
+shader_parameter/speed_scale = 0.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3pqc3"]
 size = Vector2(800, 960)
@@ -21,12 +45,21 @@ a = Vector2(0, 960)
 b = Vector2(800, 960)
 
 [node name="action_game" type="Node2D"]
-script = ExtResource("1_ak05r")
-asteroids = null
+script = SubResource("GDScript_by5pt")
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="BG_Layer1" type="TextureRect" parent="Background"]
+material = SubResource("ShaderMaterial_ksjsy")
+offset_right = 802.0
+offset_bottom = 960.0
+texture = ExtResource("3_fy5a8")
+stretch_mode = 1
 
 [node name="player_area" type="Area2D" parent="."]
 
 [node name="shape" type="CollisionShape2D" parent="player_area"]
+visible = false
 position = Vector2(400, 480)
 shape = SubResource("RectangleShape2D_3pqc3")
 

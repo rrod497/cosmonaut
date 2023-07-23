@@ -1,8 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://b8d5qitc3sv5w"]
+[gd_scene load_steps=29 format=3 uid="uid://b8d5qitc3sv5w"]
 
 [ext_resource type="Texture2D" uid="uid://vodsjv2pnnsu" path="res://art/ships/spaceShips_003.png" id="1_2je5w"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_bbjwr"]
-[ext_resource type="Script" path="res://scenes/weapon.gd" id="3_gpfny"]
+[ext_resource type="PackedScene" uid="uid://ctvdh67cfmdp2" path="res://scenes/weapon/weapon.tscn" id="3_xqcfg"]
 [ext_resource type="Texture2D" uid="uid://dkfipxmcdxe5f" path="res://art/sfx/spaceEffects_010.png" id="4_xce1q"]
 [ext_resource type="Texture2D" uid="uid://c2ewdn2wtrew3" path="res://art/damage/playerShip1_damage3.png" id="5_wxlpq"]
 [ext_resource type="Texture2D" uid="uid://dnubf07xpiarx" path="res://art/damage/playerShip1_damage2.png" id="6_ouq3v"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://blwu7owtxc8pp" path="res://art/sfx/explosion/Explosion/explosion00.png" id="8_oshj2"]
 [ext_resource type="Texture2D" uid="uid://diqsp2m2obwy5" path="res://art/sfx/explosion/Explosion/explosion08.png" id="9_nf272"]
 [ext_resource type="Texture2D" uid="uid://ck1svnpy658ct" path="res://art/sfx/explosion/Explosion/explosion07.png" id="10_r7ddc"]
+[ext_resource type="Texture2D" uid="uid://bjurlf1ea8mj5" path="res://art/sfx/star_07.png" id="11_58kex"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xhb2c"]
+radius = 400.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2upog"]
 blend_mode = 1
@@ -123,6 +127,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector2(2, 2)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:invincible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_4y0y4"]
 resource_name = "damage"
@@ -137,7 +153,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0.498039, 0.498039, 1), Color(1, 1, 1, 1), Color(1, 0.498039, 0.498039, 1), Color(1, 1, 1, 1), Color(1, 0.498039, 0.498039, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 0.498039, 0.498039, 1), Color(1, 1, 1, 0.498039), Color(1, 0.498039, 0.498039, 1), Color(1, 1, 1, 0.498039), Color(1, 0.498039, 0.498039, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:invincible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_osk5u"]
@@ -226,6 +254,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 0.498039, 0.498039, 0)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:invincible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_7k5o1"]
 resource_name = "idle"
@@ -266,10 +306,47 @@ frame_1/duration = 0.1
 frame_2/texture = ExtResource("10_r7ddc")
 frame_2/duration = 0.1
 
-[node name="player" type="CharacterBody2D"]
+[sub_resource type="Gradient" id="Gradient_1rf45"]
+offsets = PackedFloat32Array(0, 0.359606, 1)
+colors = PackedColorArray(1, 1, 1, 0.196078, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2hiv5"]
+gradient = SubResource("Gradient_1rf45")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b5d6d"]
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 100.0
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 250.0
+initial_velocity_max = 400.0
+angular_velocity_min = 20.0
+angular_velocity_max = 40.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 1.0
+linear_accel_max = 2.0
+radial_accel_max = 5.0
+damping_min = 20.0
+damping_max = 40.0
+angle_max = 45.0
+scale_min = 0.2
+scale_max = 0.25
+color_ramp = SubResource("GradientTexture1D_2hiv5")
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 504
 script = ExtResource("1_bbjwr")
+
+[node name="magnectic" type="Area2D" parent="." groups=["magnetic"]]
+collision_layer = 512
+collision_mask = 64
+
+[node name="field" type="CollisionShape2D" parent="magnectic"]
+shape = SubResource("CircleShape2D_xhb2c")
 
 [node name="ship" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
@@ -278,12 +355,6 @@ flip_v = true
 
 [node name="collider" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-100, 85, 98, 85, 50, -85, -50, -85)
-
-[node name="weapon" type="Node2D" parent="."]
-script = ExtResource("3_gpfny")
-
-[node name="muzzle" type="Marker2D" parent="weapon"]
-position = Vector2(0, -120)
 
 [node name="thruster" type="Node2D" parent="."]
 position = Vector2(0, 100)
@@ -314,4 +385,17 @@ one_shot = true
 explosiveness = 0.5
 randomness = 0.5
 
-[connection signal="fired" from="." to="weapon" method="_on_player_fired"]
+[node name="collect" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_b5d6d")
+texture = ExtResource("11_58kex")
+lifetime = 0.5
+one_shot = true
+preprocess = 0.3
+explosiveness = 0.86
+randomness = 0.3
+
+[node name="weapons" type="Node2D" parent="."]
+
+[node name="weapon" parent="weapons" instance=ExtResource("3_xqcfg")]

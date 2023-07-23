@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ej3kj572xth3"]
+
+[ext_resource type="Script" path="res://scenes/collectibles/powerup.gd" id="1_g1lw5"]
+[ext_resource type="PackedScene" uid="uid://kograic2lq3w" path="res://scenes/weapon/missile.tscn" id="2_scebv"]
+[ext_resource type="Texture2D" uid="uid://dgqs03vh13ld4" path="res://art/powerups/powerupBlue.png" id="3_e7qtc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rtdwl"]
+size = Vector2(34, 34)
+
+[node name="equip" type="Area2D"]
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_g1lw5")
+kind = "weapon"
+content = ExtResource("2_scebv")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_e7qtc")
+
+[node name="collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rtdwl")
+
+[node name="lifespan" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="lifespan" to="." method="_on_lifespan_timeout"]

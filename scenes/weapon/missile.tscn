@@ -1,10 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://kograic2lq3w"]
+[gd_scene load_steps=18 format=3 uid="uid://kograic2lq3w"]
 
-[ext_resource type="Script" path="res://scenes/missile.gd" id="1_72rxo"]
-[ext_resource type="Texture2D" uid="uid://dokcvpyerj4a0" path="res://art/sfx/spaceEffects_008.png" id="1_vc576"]
-[ext_resource type="Texture2D" uid="uid://b2cpp5wtfk57h" path="res://art/sfx/spaceEffects_011.png" id="2_o5bwd"]
-[ext_resource type="Texture2D" uid="uid://b3abkk5isgiqf" path="res://art/missiles/spaceMissiles_001.png" id="3_03ohw"]
-[ext_resource type="Texture2D" uid="uid://bexqkonslu1ng" path="res://art/sfx/scorch_02.png" id="4_qpr0o"]
+[ext_resource type="Script" path="res://scenes/weapon/missile.gd" id="1_m383d"]
+[ext_resource type="Script" path="res://scenes/weapon/projectile_prefs.gd" id="2_e2j6j"]
+[ext_resource type="Texture2D" uid="uid://b3abkk5isgiqf" path="res://art/missiles/spaceMissiles_001.png" id="3_uxubh"]
+[ext_resource type="Texture2D" uid="uid://bexqkonslu1ng" path="res://art/sfx/scorch_02.png" id="4_b547h"]
+[ext_resource type="Texture2D" uid="uid://b2cpp5wtfk57h" path="res://art/sfx/spaceEffects_011.png" id="5_a32as"]
+[ext_resource type="Texture2D" uid="uid://dokcvpyerj4a0" path="res://art/sfx/spaceEffects_008.png" id="6_belex"]
+
+[sub_resource type="Resource" id="Resource_2y32k"]
+script = ExtResource("2_e2j6j")
+damage = 1
+speed = 600
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omfcp"]
 size = Vector2(10, 30)
@@ -150,17 +156,18 @@ color_initial_ramp = SubResource("GradientTexture1D_ehin2")
 hue_variation_min = -0.15
 hue_variation_max = 0.1
 
-[node name="missile" type="Area2D"]
+[node name="missile" type="Area2D" groups=["player_fire"]]
 collision_layer = 4
 collision_mask = 280
-script = ExtResource("1_72rxo")
+script = ExtResource("1_m383d")
+prefs = SubResource("Resource_2y32k")
 
 [node name="collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_omfcp")
 
 [node name="sprite" type="Sprite2D" parent="."]
-texture = ExtResource("3_03ohw")
+texture = ExtResource("3_uxubh")
 
 [node name="anime" type="AnimationPlayer" parent="."]
 root_node = NodePath("../sprite")
@@ -176,7 +183,7 @@ material = SubResource("CanvasItemMaterial_t54xu")
 emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_3lcvx")
-texture = ExtResource("4_qpr0o")
+texture = ExtResource("4_b547h")
 lifetime = 0.25
 one_shot = true
 speed_scale = 2.0
@@ -188,7 +195,7 @@ material = SubResource("CanvasItemMaterial_t54xu")
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_3lcvx")
-texture = ExtResource("2_o5bwd")
+texture = ExtResource("5_a32as")
 lifetime = 0.25
 one_shot = true
 speed_scale = 2.0
@@ -199,7 +206,7 @@ material = SubResource("CanvasItemMaterial_t54xu")
 position = Vector2(0, 16)
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_dw84f")
-texture = ExtResource("1_vc576")
+texture = ExtResource("6_belex")
 lifetime = 0.2
 explosiveness = 0.15
 randomness = 0.5

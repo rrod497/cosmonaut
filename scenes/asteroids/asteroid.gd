@@ -4,6 +4,7 @@ extends Area2D
 enum Size {S, M, L, XL}
 
 signal destroyed
+signal partitioned(debris)
 
 @export var prefs : AsteroidPrefs
 @export var size = Size.S
@@ -16,23 +17,25 @@ signal destroyed
 @onready var _scale = prefs.scale
 @onready var _damage = prefs.damage
 @onready var _debris = randi_range(prefs.min_debris, prefs.max_debris)
+@onready var _knockback = 0
 
 func _process(delta):
   if hits >= _max_hits:
     destroy()
   else:
+    if _knockback:
+      _knockback = lerp(_knockback, 0.0 , 0.1)
+    translate(direction * (delta * _speed) - Vector2(0, _knockback))
     rotate(_spin * delta)
-    translate(direction * (delta * _speed))
-
-func _on_area_entered(area):
-  damage()
 
 func damage():
   hits += 1
   if hits < _max_hits:
     $anime.play("damage")
     _spin = randf_range(-prefs.max_spin, prefs.max_spin)
+    direction = Vector2(randf_range(-0.25, 0.25), 1)
   else:
+    drop()
     destroy()
     partition(_debris)
 
@@ -46,14 +49,30 @@ func destroy():
 
 func partition(debris):
   var asteroids = settings.get_asteroids(size)
-#  var asteroids = settings.asteroids
-#  var asteroids = settings.asteroids.filter(func(a): return a.resource < size)
   if asteroids.is_empty():
     return
   for n in debris:
     var asteroid = asteroids.pick_random().instantiate()
     call_deferred("add_sibling", asteroid)
-#    get_parent().call_deferred("add_child", a)
     asteroid.position = position
     asteroid.rotation = rotation
     asteroid.direction = Vector2(randf_range(-1, 1), 1).normalized()
+  partitioned.emit(debris)
+
+func drop():
+  var mineral = settings.mineral.instantiate()
+  call_deferred("add_sibling", mineral)
+  mineral.position = position
+#  game_state.action.call_deferred("add_child", mineral)
+#  mineral.global_position = global_position
+
+
+func _on_body_entered(body):
+  if body.is_in_group("player"):
+    (body as Player).damage(_damage)
+  destroy()
+
+func _on_area_entered(area):
+  if area.is_in_group("player_fire"):
+    _knockback += prefs.knockback
+    damage()

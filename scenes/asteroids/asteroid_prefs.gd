@@ -9,3 +9,4 @@ extends Resource
 @export var damage : int = 1
 @export var min_debris : int = 0
 @export var max_debris : int = 0
+@export var knockback : float = 0.0
