@@ -24,6 +24,8 @@ func _ready():
   $player.visible = false
   $player.set_deferred("monitoring", false)
   $player/collider.set_deferred("disabled", true)
+  $asteroid_spawn.stop()
+  $clock.stop()
 
 func start():
   _running = true
@@ -32,6 +34,7 @@ func start():
   $player.visible = true
   $player.set_deferred("monitoring", true)
   $player/collider.set_deferred("disabled", false)
+  $player.alive = true
 
 func _on_asteroid_spawn_timeout():
   var asteroid = settings.get_asteroids().pick_random().instantiate()
@@ -65,7 +68,6 @@ func _on_player_collected(stuff, amount = 1):
       $player.put_shield()
     elif powerup.kind == "fuel":
       time = min(time+30, 100)
-#      game_state.weapons += equip.content
       fuel_changed.emit(time)
 
 func _on_visible_area_exited(area):
@@ -76,8 +78,9 @@ func _on_visible_area_exited(area):
       area.position.x = left - 40
     if area.position.y < bottom:
       return
-  await get_tree().create_timer(1000).timeout
-  area.queue_free()
+  await get_tree().create_timer(1).timeout
+  if area != null:
+    area.queue_free()
 
 
 func _on_player_shield_onoff(state):
@@ -85,4 +88,6 @@ func _on_player_shield_onoff(state):
 
 
 func _on_player_destroyed():
+  $asteroid_spawn.stop()
+  $clock.stop()
   gameover.emit()

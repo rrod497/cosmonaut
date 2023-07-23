@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://de7yyddnd6dvj"]
+[gd_scene load_steps=20 format=3 uid="uid://de7yyddnd6dvj"]
 
 [ext_resource type="Script" path="res://scenes/settings.gd" id="1_rpvnh"]
 [ext_resource type="PackedScene" uid="uid://da2kygldhpv42" path="res://scenes/asteroids/asteroid_S1.tscn" id="2_0eesc"]
@@ -9,16 +9,24 @@
 [ext_resource type="PackedScene" uid="uid://dt4v5a232fco7" path="res://scenes/asteroids/asteroid_M1.tscn" id="4_mgvo1"]
 [ext_resource type="PackedScene" uid="uid://cnellm8s8w12q" path="res://scenes/asteroids/asteroid_M2.tscn" id="5_qqjjl"]
 [ext_resource type="PackedScene" uid="uid://7sr1rpktywpk" path="res://scenes/asteroids/asteroid_L4.tscn" id="5_tpcac"]
-[ext_resource type="PackedScene" uid="uid://bnv3dsph5e4kk" path="res://scenes/collectibles/mineral.tscn" id="10_rbxke"]
+[ext_resource type="PackedScene" uid="uid://tvb02vyomrw5" path="res://scenes/collectibles/mineral_bronze.tscn" id="10_dy633"]
 [ext_resource type="PackedScene" uid="uid://x4qsagll1ea" path="res://scenes/weapon/weapon_lv1.tscn" id="11_dikq7"]
+[ext_resource type="PackedScene" uid="uid://cxxpuw0wv68mk" path="res://scenes/collectibles/mineral_silver.tscn" id="11_puqxy"]
 [ext_resource type="PackedScene" uid="uid://63qkpx32ho6d" path="res://scenes/weapon/weapon_lv2.tscn" id="12_3b60i"]
+[ext_resource type="PackedScene" uid="uid://inspjipcg4y7" path="res://scenes/collectibles/mineral_gold.tscn" id="12_ctag0"]
 [ext_resource type="PackedScene" uid="uid://chthm86d612gr" path="res://scenes/weapon/weapon_lv3.tscn" id="13_2ijd7"]
+[ext_resource type="PackedScene" uid="uid://cqcvtruflgkfm" path="res://scenes/collectibles/powerup_fuel.tscn" id="14_kg31v"]
 [ext_resource type="PackedScene" uid="uid://ku6n7a3wjf06" path="res://scenes/weapon/weapon_lv4.tscn" id="14_wt0ed"]
+[ext_resource type="PackedScene" uid="uid://cnhsb76yoj520" path="res://scenes/collectibles/powerup_missile.tscn" id="15_i4o15"]
+[ext_resource type="PackedScene" uid="uid://o0ffnsuxnkkf" path="res://scenes/collectibles/powerup_shield.tscn" id="16_7n35k"]
 
 [node name="settings" type="Node"]
 script = ExtResource("1_rpvnh")
 asteroids_S = Array[PackedScene]([ExtResource("2_0eesc"), ExtResource("3_es36s")])
 asteroids_M = Array[PackedScene]([ExtResource("4_mgvo1"), ExtResource("5_qqjjl")])
 asteroids_L = Array[PackedScene]([ExtResource("2_l2rm0"), ExtResource("3_qeptb"), ExtResource("4_43hwa"), ExtResource("5_tpcac")])
-mineral = ExtResource("10_rbxke")
+bronze = ExtResource("10_dy633")
+silver = ExtResource("11_puqxy")
+gold = ExtResource("12_ctag0")
 weapons = Array[PackedScene]([ExtResource("11_dikq7"), ExtResource("12_3b60i"), ExtResource("13_2ijd7"), ExtResource("14_wt0ed")])
+powerups = Array[PackedScene]([ExtResource("14_kg31v"), ExtResource("15_i4o15"), ExtResource("16_7n35k")])

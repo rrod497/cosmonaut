@@ -8,6 +8,9 @@ extends Node2D
 @onready var shield = $HUD_Elements/HPDisplay/shield
 @onready var weapon_slider = $HUD_Elements/WeaponDisplay/Slider
 
+func _ready():
+  pass
+
 func _on_action_scene_player_hp_changed(hp):
   var hpslots = hpbar.get_children()
   for i in hpslots.size():
@@ -39,6 +42,7 @@ func _on_newgame_pressed():
 
 func _on_action_scene_gameover():
   $HUD_Elements/HUD_gamestate/gameover.visible = true
-  await get_tree().create_timer(3000).timeout
+  await get_tree().create_timer(3).timeout
+  $HUD_BG/BG_SceneDisplay/action_scene.get_tree().reload_current_scene()
   $HUD_Elements/HUD_gamestate/gameover.visible = false
   $HUD_Elements/HUD_gamestate/newgame.visible = true

@@ -6,7 +6,11 @@ extends Node2D
 @export var active = false
 
 func shoot():
-  for muzzle in $muzzles.get_children():
+  var muzzles = $muzzles.get_children()
+  if muzzles.is_empty(): return
+#  $audio.seek(1)
+  $audio.play()
+  for muzzle in muzzles:
     fire(muzzle)
 
 func fire(muzzle):

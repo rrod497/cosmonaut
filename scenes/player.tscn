@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b8d5qitc3sv5w"]
+[gd_scene load_steps=35 format=3 uid="uid://b8d5qitc3sv5w"]
 
 [ext_resource type="Texture2D" uid="uid://vodsjv2pnnsu" path="res://art/ships/spaceShips_003.png" id="1_2je5w"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_bbjwr"]
@@ -12,6 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://ck1svnpy658ct" path="res://art/sfx/explosion/Explosion/explosion07.png" id="10_r7ddc"]
 [ext_resource type="Texture2D" uid="uid://bjurlf1ea8mj5" path="res://art/sfx/star_07.png" id="11_58kex"]
 [ext_resource type="PackedScene" uid="uid://x4qsagll1ea" path="res://scenes/weapon/weapon_lv1.tscn" id="12_bgvsf"]
+[ext_resource type="AudioStream" uid="uid://dbej8r3tqogjo" path="res://audio/sfx/sfx_lose.ogg" id="13_bqf62"]
+[ext_resource type="AudioStream" uid="uid://bieqdri3ulcg0" path="res://audio/sfx/sfx_twoTone.ogg" id="14_82gm7"]
+[ext_resource type="AudioStream" uid="uid://d0qpf6gg6r7hf" path="res://audio/sfx/sfx_shieldUp.ogg" id="15_04fb3"]
+[ext_resource type="AudioStream" uid="uid://bjqhvohyg6lo4" path="res://audio/sfx/sfx_shieldDown.ogg" id="16_rv7am"]
+[ext_resource type="AudioStream" uid="uid://cg3uefwe216x1" path="res://audio/sfx/sfx_zap.ogg" id="17_y2jg2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhb2c"]
 radius = 400.0
@@ -140,6 +145,30 @@ tracks/7/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("audio/damage:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("audio/lose:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_4y0y4"]
 resource_name = "damage"
@@ -167,6 +196,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("audio/damage:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_osk5u"]
@@ -262,6 +303,18 @@ tracks/7/path = NodePath(".:invincible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("audio/lose:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -407,5 +460,22 @@ randomness = 0.3
 [node name="shield_timespan" type="Timer" parent="."]
 wait_time = 20.0
 one_shot = true
+
+[node name="audio" type="Node2D" parent="."]
+
+[node name="lose" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("13_bqf62")
+
+[node name="damage" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("14_82gm7")
+
+[node name="shieldup" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("15_04fb3")
+
+[node name="shielddown" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("16_rv7am")
+
+[node name="collect" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("17_y2jg2")
 
 [connection signal="timeout" from="shield_timespan" to="." method="_on_shield_timeout"]

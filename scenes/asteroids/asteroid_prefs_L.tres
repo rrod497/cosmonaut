@@ -13,3 +13,4 @@ damage = 2
 min_debris = 2
 max_debris = 5
 knockback = 5.0
+max_loot = 2

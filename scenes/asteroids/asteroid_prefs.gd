@@ -10,3 +10,4 @@ extends Resource
 @export var min_debris : int = 0
 @export var max_debris : int = 0
 @export var knockback : float = 0.0
+@export var max_loot : int = 1

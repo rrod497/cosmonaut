@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://inspjipcg4y7"]
+
+[ext_resource type="PackedScene" uid="uid://bnv3dsph5e4kk" path="res://scenes/collectibles/mineral.tscn" id="1_a60n1"]
+[ext_resource type="Texture2D" uid="uid://d2vdtlpu7rff3" path="res://art/powerups/things_gold.png" id="2_ook02"]
+
+[node name="mineral_gold" instance=ExtResource("1_a60n1")]
+kind = 2
+
+[node name="sprite" parent="." index="2"]
+texture = ExtResource("2_ook02")

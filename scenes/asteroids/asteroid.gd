@@ -35,7 +35,7 @@ func damage():
     _spin = randf_range(-prefs.max_spin, prefs.max_spin)
     direction = Vector2(randf_range(-0.25, 0.25), 1)
   else:
-    drop()
+    drop_loot()
     destroy()
     partition(_debris)
 
@@ -59,13 +59,12 @@ func partition(debris):
     asteroid.direction = Vector2(randf_range(-1, 1), 1).normalized()
   partitioned.emit(debris)
 
-func drop():
-  var mineral = settings.mineral.instantiate()
-  call_deferred("add_sibling", mineral)
-  mineral.position = position
-#  game_state.action.call_deferred("add_child", mineral)
-#  mineral.global_position = global_position
-
+func drop_loot():
+  var loot = settings.get_loot(prefs.max_loot)
+  for item in loot:
+    var collectible = item.instantiate()
+    call_deferred("add_sibling", collectible)
+    collectible.position = position
 
 func _on_body_entered(body):
   if body.is_in_group("player"):
