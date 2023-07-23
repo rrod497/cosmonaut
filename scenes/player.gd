@@ -6,11 +6,13 @@ signal destroyed
 signal hp_changed(hp, delta)
 signal equipped(weapon)
 signal collected(stuff, amount)
+signal shield_onoff(state)
 
 @export var speed = 500
 @export var hp = 5
 @export var alive = true
 @export var invincible = false
+@export var shield = false
 #@export var weapons : Array[PackedScene]
 #@export var active_weapon
 
@@ -73,3 +75,27 @@ func damage(points):
 func collect(stuff, amount):
   $collect.emitting = true
   collected.emit(stuff, amount)
+
+func put_shield():
+  if !shield:
+    shield = true
+    $shield.visible = true
+    shield_onoff.emit(shield)
+    $shield.set_deferred("monitoring", true)
+    $shield/collider.set_deferred("disabled", false)
+  $shield_timespan.stop()
+  $shield_timespan.start()
+
+func remove_shield():
+  if shield:
+    shield = false
+    $shield.visible = false
+    shield_onoff.emit(shield)
+    $anime.play("damage")
+    $shield.set_deferred("monitoring", false)
+    $shield/collider.set_deferred("disabled", true)
+  $shield_timespan.stop()
+
+
+func _on_shield_timeout():
+  remove_shield()

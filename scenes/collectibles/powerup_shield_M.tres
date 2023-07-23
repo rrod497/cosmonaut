@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PowerUpShieldPrefs" load_steps=2 format=3 uid="uid://mlmc8itmuivw"]
+
+[ext_resource type="Script" path="res://scenes/collectibles/powerup_shield_prefs.gd" id="1_lrs0c"]
+
+[resource]
+script = ExtResource("1_lrs0c")
+timespan = 30

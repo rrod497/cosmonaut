@@ -4,11 +4,12 @@ extends Node2D
 signal player_hp_changed(hp)
 signal fuel_changed(remaining)
 signal minerals_changed(kind, amount)
-signal equip_changed(kind)
+signal equip_changed(level)
+signal shield_changed(state)
 
 @export var asteroids : Array[PackedScene]
 var _running = false
-var time = 60
+var time = 100
 #var minerals =
 
 @onready var top = $visible/bounds/top.shape.a.y
@@ -43,11 +44,17 @@ func _on_player_collected(stuff, amount = 1):
     var mineral = stuff as Mineral
     game_state.minerals[mineral.kind] += amount
     minerals_changed.emit(mineral.kind, game_state.minerals[mineral.kind])
-  elif stuff is Equip:
-    var equip = stuff as Equip
-    if equip.kind == "weapon":
+  elif stuff is PowerUp:
+    var powerup = stuff as PowerUp
+    if powerup.kind == "weapon":
+      game_state.weapon_level = min(game_state.weapon_level + 1, 5)
+      equip_changed.emit(game_state.weapon_level)
+    elif powerup.kind == "shield":
+      $player.put_shield()
+    elif powerup.kind == "fuel":
+      time = min(time+30, 100)
 #      game_state.weapons += equip.content
-      equip_changed.emit(equip.kind)
+      fuel_changed.emit(time)
 
 func _on_visible_area_exited(area):
   if area.is_in_group("asteroids"):
@@ -57,7 +64,9 @@ func _on_visible_area_exited(area):
       area.position.x = left - 40
     if area.position.y < bottom:
       return
-    else:
-      pass
   await get_tree().create_timer(1000).timeout
   area.queue_free()
+
+
+func _on_player_shield_onoff(state):
+  shield_changed.emit(state)

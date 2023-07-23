@@ -1,8 +1,8 @@
-class_name Equip
+class_name PowerUp
 extends Area2D
 
 @export var kind : String
-@export var content : PackedScene
+@export var content : Resource
 @export var speed = 100
 var _next_pos = Vector2()
 var _last_pos = Vector2()
@@ -20,8 +20,6 @@ func _next_position():
   _last_pos = position
   var x = randi_range(game_state.action.left, game_state.action.right)
   var y = randi_range(game_state.action.bottom, game_state.action.top)
-#  var x = randi_range(0, 1920)
-#  var y = randi_range(0, 1080)
   _next_pos = Vector2(x, y)
 
 func _on_body_entered(body):
@@ -31,3 +29,6 @@ func _on_body_entered(body):
 
 func _on_lifespan_timeout():
   queue_free()
+
+func _on_hurryup_timeout():
+  $anime.play("hurryup")

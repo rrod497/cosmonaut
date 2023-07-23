@@ -69,6 +69,7 @@ fire={
 2d_physics/layer_8="bounds"
 2d_physics/layer_9="fixture"
 2d_physics/layer_10="magnet"
+2d_physics/layer_11="shield"
 
 [rendering]
 

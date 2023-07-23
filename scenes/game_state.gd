@@ -8,4 +8,5 @@ extends Node2D
   Mineral.Kind.Silver: 0,
   Mineral.Kind.Gold: 0,
 }
+@export var weapon_level = 1
 #@export var weapons : Array[Weapon]

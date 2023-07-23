@@ -76,3 +76,7 @@ func _on_area_entered(area):
   if area.is_in_group("player_fire"):
     _knockback += prefs.knockback
     damage()
+  elif area.is_in_group("shield"):
+    _knockback += prefs.knockback
+    game_state.player.remove_shield()
+    damage()
