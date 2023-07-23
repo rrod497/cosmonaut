@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_y2fes")
-max_hits = 5
+max_hits = 4
 scale = 3
 max_spin = 4
 min_speed = 50
 max_speed = 150
 damage = 3
-min_debris = 3
-max_debris = 4
+min_debris = 2
+max_debris = 5

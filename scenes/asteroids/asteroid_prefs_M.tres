@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_giheu")
-max_hits = 1
+max_hits = 2
 scale = 2
 max_spin = 5
 min_speed = 62
 max_speed = 175
 damage = 2
-min_debris = 1
+min_debris = 0
 max_debris = 3
