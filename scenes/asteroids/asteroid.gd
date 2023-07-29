@@ -19,6 +19,8 @@ signal partitioned(debris)
 @onready var _debris = randi_range(prefs.min_debris, prefs.max_debris)
 @onready var _knockback = 0
 
+var isDestroyed = false
+
 func _process(delta):
   if hits >= _max_hits:
     destroy()
@@ -40,6 +42,7 @@ func damage():
     partition(_debris)
 
 func destroy():
+  isDestroyed = true
   destroyed.emit()
   set_deferred("monitoring", false)
   $collider.set_deferred("disabled", true)
@@ -71,11 +74,14 @@ func _on_body_entered(body):
     (body as Player).damage(_damage)
   destroy()
 
+func hit():
+    _knockback += prefs.knockback
+    damage()
+
+
 func _on_area_entered(area):
   if area.is_in_group("player_fire"):
-    _knockback += prefs.knockback
-    damage()
+    hit()
   elif area.is_in_group("shield"):
-    _knockback += prefs.knockback
+    destroy()
     game_state.player.remove_shield()
-    damage()

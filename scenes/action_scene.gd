@@ -51,7 +51,13 @@ func _on_player_hp_changed(hp, delta):
 func _on_clock_timeout():
   if !_running: return
   time -= 1
-  fuel_changed.emit(time)
+  if time <= 0:
+    $player.alive = false
+    $asteroid_spawn.stop()
+    $clock.stop()
+    gameover.emit()
+  else:
+    fuel_changed.emit(time)
 
 func _on_player_collected(stuff, amount = 1):
   if stuff is Mineral:

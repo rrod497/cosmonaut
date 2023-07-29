@@ -37,5 +37,5 @@ func get_loot(n):
     elif x < 610: res.append(bronze)
     elif x < 640: res.append(powerups[0])
     elif x < 670: res.append(powerups[1])
-    elif x < 600: res.append(powerups[2])
+    elif x < 700: res.append(powerups[2])
   return res

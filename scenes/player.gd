@@ -84,6 +84,7 @@ func damage(points):
     destroy()
 
 func collect(stuff, amount):
+  if !alive: return
   $collect.emitting = true
   $audio/collect.play()
   collected.emit(stuff, amount)

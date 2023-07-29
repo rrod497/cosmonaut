@@ -1,0 +1,215 @@
+[gd_scene load_steps=18 format=3 uid="uid://cuohywnk0410a"]
+
+[ext_resource type="Script" path="res://scenes/weapon/homing_missile.gd" id="1_b8f2m"]
+[ext_resource type="Script" path="res://scenes/weapon/projectile_prefs.gd" id="2_mn8lx"]
+[ext_resource type="Texture2D" uid="uid://b3abkk5isgiqf" path="res://art/missiles/spaceMissiles_001.png" id="3_hx065"]
+[ext_resource type="Texture2D" uid="uid://bexqkonslu1ng" path="res://art/sfx/scorch_02.png" id="4_tun48"]
+[ext_resource type="Texture2D" uid="uid://b2cpp5wtfk57h" path="res://art/sfx/spaceEffects_011.png" id="5_sq70i"]
+[ext_resource type="Texture2D" uid="uid://dokcvpyerj4a0" path="res://art/sfx/spaceEffects_008.png" id="6_m4j74"]
+
+[sub_resource type="Resource" id="Resource_rvkhn"]
+script = ExtResource("2_mn8lx")
+damage = 1
+speed = 500
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omfcp"]
+size = Vector2(10, 30)
+
+[sub_resource type="Animation" id="Animation_oliib"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../explosion:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../trail:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lljse"]
+resource_name = "destroy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../explosion:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../trail:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qek1i"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../trail:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wcs0l"]
+_data = {
+"RESET": SubResource("Animation_oliib"),
+"destroy": SubResource("Animation_lljse"),
+"idle": SubResource("Animation_qek1i")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t54xu"]
+blend_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3lcvx"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 180.0
+scale_min = 0.1
+scale_max = 0.2
+
+[sub_resource type="Gradient" id="Gradient_okc1s"]
+offsets = PackedFloat32Array(0, 0.536946, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.498039, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ehin2"]
+gradient = SubResource("Gradient_okc1s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dw84f"]
+emission_shape = 2
+emission_sphere_radius = 2.0
+particle_flag_disable_z = true
+flatness = 0.5
+gravity = Vector3(0, 98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_max = 0.5
+scale_min = 0.5
+color = Color(0.917647, 0.87451, 0.203922, 1)
+color_initial_ramp = SubResource("GradientTexture1D_ehin2")
+hue_variation_min = -0.15
+hue_variation_max = 0.1
+
+[node name="missile" type="Area2D" groups=["player_fire"]]
+collision_layer = 4
+collision_mask = 280
+script = ExtResource("1_b8f2m")
+prefs = SubResource("Resource_rvkhn")
+
+[node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_omfcp")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_hx065")
+
+[node name="anime" type="AnimationPlayer" parent="."]
+root_node = NodePath("../sprite")
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_wcs0l")
+}
+
+[node name="visible" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="explosion" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_t54xu")
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_3lcvx")
+texture = ExtResource("4_tun48")
+lifetime = 0.25
+one_shot = true
+speed_scale = 2.0
+randomness = 1.0
+
+[node name="spawn" type="GPUParticles2D" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+material = SubResource("CanvasItemMaterial_t54xu")
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_3lcvx")
+texture = ExtResource("5_sq70i")
+lifetime = 0.25
+one_shot = true
+speed_scale = 2.0
+randomness = 1.0
+
+[node name="trail" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_t54xu")
+position = Vector2(0, 16)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_dw84f")
+texture = ExtResource("6_m4j74")
+lifetime = 0.2
+explosiveness = 0.15
+randomness = 0.5
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="visible" to="." method="_on_visible_screen_exited"]
