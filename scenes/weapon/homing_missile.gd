@@ -16,12 +16,8 @@ func start(pos, dir):
 func _physics_process(delta):
   if target.get_ref():
     _dir = _dir.lerp(position.direction_to(target.get_ref().position), delta * 10).normalized()
-#    _dir = position.direction_to(target)
-#    position = position.lerp(target.position, delta * _speed)
   translate(delta * _dir * _speed)
   rotate(get_angle_to(global_position + _dir)+ PI/2)
-#  rotation = to_local(_dir).angle() + PI/2
-#  look_at(_dir)
 
 
 func _on_visible_screen_exited():
@@ -42,5 +38,6 @@ func destroy():
 func select_target():
   var foes = get_tree().get_nodes_in_group("asteroids")
   foes.filter(func (a): a.isDestroyed == false)
-  foes.sort_custom(func (a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
-  return foes[0]
+  if !foes.is_empty():
+    foes.sort_custom(func (a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
+    return foes[0]
