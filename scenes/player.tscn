@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b8d5qitc3sv5w"]
+[gd_scene load_steps=36 format=3 uid="uid://b8d5qitc3sv5w"]
 
 [ext_resource type="Texture2D" uid="uid://vodsjv2pnnsu" path="res://art/ships/spaceShips_003.png" id="1_2je5w"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_bbjwr"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bjurlf1ea8mj5" path="res://art/sfx/star_07.png" id="11_58kex"]
 [ext_resource type="PackedScene" uid="uid://x4qsagll1ea" path="res://scenes/weapon/weapon_lv1.tscn" id="12_bgvsf"]
 [ext_resource type="AudioStream" uid="uid://dbej8r3tqogjo" path="res://audio/sfx/sfx_lose.ogg" id="13_bqf62"]
+[ext_resource type="PackedScene" uid="uid://cuohywnk0410a" path="res://scenes/weapon/homing_missile.tscn" id="13_gk8fg"]
 [ext_resource type="AudioStream" uid="uid://bieqdri3ulcg0" path="res://audio/sfx/sfx_twoTone.ogg" id="14_82gm7"]
 [ext_resource type="AudioStream" uid="uid://d0qpf6gg6r7hf" path="res://audio/sfx/sfx_shieldUp.ogg" id="15_04fb3"]
 [ext_resource type="AudioStream" uid="uid://bjqhvohyg6lo4" path="res://audio/sfx/sfx_shieldDown.ogg" id="16_rv7am"]
@@ -456,6 +457,7 @@ randomness = 0.3
 [node name="weapons" type="Node2D" parent="."]
 
 [node name="weapon_lv1" parent="weapons" instance=ExtResource("12_bgvsf")]
+projectile = ExtResource("13_gk8fg")
 
 [node name="shield_timespan" type="Timer" parent="."]
 wait_time = 20.0
